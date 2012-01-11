@@ -1,3 +1,37 @@
+commit 9aa605b2422755bcf0f72840bee262246371a115
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:59:04 2012 +0100
+
+    msm: rpc: free the buffer if read fails.
+    
+    In do_read_data(), while reading a data fragment, if
+    read() fails to read all the required bytes, free the fragment
+    buffer.  Also correct the allocation size for fragment buffer.
+
+commit 64cb26a2260721138dda3851cb85acc6609d7b5b
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:56:29 2012 +0100
+
+    Update msm_q6venc.h to .38 version from codeaurora
+
+commit 9dee7aa2183f24a7b6bef1296b7cfa7cca774b34
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:54:52 2012 +0100
+
+    fix previous commit
+
+commit ce563edc46e4525b0ac1cd34cefd4871708d8e25
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:52:22 2012 +0100
+
+    Backport qdsp6 venc driver from .38 kernel
+
+commit a35915352e5464c956d5694872cf446edf71e108
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:49:04 2012 +0100
+
+    Switch to bcm4329_204 in order to have working wireless hotspot
+
 commit 6c6f346954b9cef4e763550ef8a13fe358b1abdb
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 12:32:55 2012 +0100
