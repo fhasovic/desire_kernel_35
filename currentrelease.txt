@@ -1,3 +1,9 @@
+commit ba40b73be87f969e089dc7d17758b25f854d715a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 20:48:36 2012 +0100
+
+    tried to fix usb tethering (note: rndis and adb will not work together on windows)
+
 commit e0be97d9cff6a2a85f3b92f64725ec7e9556eb00
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 20:37:20 2012 +0100
