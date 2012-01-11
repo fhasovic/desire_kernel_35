@@ -1,3 +1,64 @@
+commit d273d6c1328d593780fdc823c55e0f133b9d844a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:28:45 2012 +0100
+
+    port genlock from ca msm-3.0
+
+commit 60f91c1a6bbd3687b35fdca5d1227669503ffb68
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:21:24 2012 +0100
+
+    backported kgsl drivers from msm-3.0
+
+commit a84dc7a2f109856e6a5220af88fbf7d40e413386
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:18:29 2012 +0100
+
+    Fixed hardcoded setting of REG_PLL_MULTIPLIER_LSB (This is set to 65.5 MHz in the HTC version of s5k3e2fx.c while
+    the up-to-date codeaurora file sets this to REG_PLL_MULTIPLIER_LSB_VALUE (83 MHz))
+
+commit 3f6ee146b25a38e0c67fe3bce224ef00f1e2d3d3
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:16:03 2012 +0100
+
+    Removed obsolete code for msm_clocks(Switched to .35 desire msm_clocks[])
+    Fixed remaining issues after getting rid of obsolete msm_clocks
+
+commit 7d846008eb38dd1b6897c4093d78a5da91b2ca9e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:08:01 2012 +0100
+
+    Modified qdsp6 for htc leo
+
+commit f06c5c8a6e864a4e56a6d4b282097d35bdb36aa8
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 2 11:03:26 2012 +0100
+
+    Added missing files
+
+commit 0cb4cb9f2557f082ccd4fdf3a2cd605ab4196c93
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 2 01:05:17 2012 +0100
+
+    Tweaked BFS (bananacakes)
+    Some more cleanup in htcleo files (marc1706)
+    audio: added Two-way call recording (Credit to avs333)
+    htcleo: audio: add proc file interface /proc/mic_level and fix mic gain (Credits to mdebeljuh and jdivic)
+    Added zram from 2.6.38 kernel and used faux123's files (marc1706)
+    late_initcall has to be right after the function definition (marc1706)
+    Cleanup in AVS files
+    wifi undervolting
+    Updated defconfig to .35 settings (marc1706)
+    Raised HZ to 300 (marc1706)
+    Ext4 Patches from 3.x.x Kernel (Sar Castillo)
+    Minor cleanup of some typo errors in suspend.c code
+    Kernel changed to GZIP compression
+    Small tweak for ondemand governor
+    Added Ezekeel's lazy governor with all default parameters.
+    Update to lulzactive V2 Thanks to tegrak.
+    changed default governor to ONDEMAND
+    implemented support for CyanogenMod Performance settings to change the max CPU and min CPU frequency
+
 commit c89f9996df5d3bd40b4bf7a82ed9bb4d55f062be
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Dec 28 11:27:31 2011 +0100
