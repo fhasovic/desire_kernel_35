@@ -1,3 +1,100 @@
+commit 6c6f346954b9cef4e763550ef8a13fe358b1abdb
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:32:55 2012 +0100
+
+    ARM: Move leds idle start/stop calls to idle notifiers
+    ARM: idle: update idle ticks before call idle end notifier (Such that interactive cpufreq governor uses up-to-date idle time
+    information.)
+    ARM: idle: call idle notifiers before stopping nohz tick (If an idle notifier modifies a timer, calling the notifier after
+    the sched tick has been stopped may leave the sched tick set too early.  Move teh idle notifier call before the call to
+    tick_nohz_stop_sched_tick.)
+
+commit 1612f3d9f21889dcb79afcb55a1e6647a0f52215
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:29:08 2012 +0100
+
+    ARM: Call idle notifiers
+
+commit 6b0e7ded2892c6042ffd1608249ff31196457242
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:27:56 2012 +0100
+
+    Move x86_64 idle notifiers to generic
+
+commit 058d85cad10387e674651af221a5e6f64253a91a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:23:59 2012 +0100
+
+    cpufreq: use system_wq instead of dedicated workqueues (With cmwq, there's no reason for cpufreq drivers to use separate
+    workqueues.  Remove the dedicated workqueues from cpufreq_conservative and cpufreq_ondemand and use system_wq instead.  The work items are
+    already sync canceled on stop, so it's already guaranteed that no work is running on module exit.)
+    [CPUFREQ] calculate delay after dbs_check_cpu (calculate ondemand delay after dbs_check_cpu call because it can
+    modify rate_mult value, use freq_lo_jiffies value for the sub sample period of powersave_bias mode)
+    [CPUFREQ] Remove deprecated sysfs file sampling_rate_max
+    [CPUFREQ] Remove old, deprecated per cpu ondemand/conservative sysfs files
+    [CPUFREQ] Remove unneeded locks (There cannot be any concurrent access to these through
+    different cpu sysfs files anymore, because these tunables are now all global (not per cpu).)
+
+commit 2c93bd9081cd752646b7f33c7c00bc966b770869
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:19:38 2012 +0100
+
+    sched: refactor task_group() (move cgroup-related task group finding to cgroup_task_group().
+    No function change.)
+    sched: Don't call task_group() too many times in set_task_rq() (It improves perfomance, especially if autogroup is enabled.
+    The size of set_task_rq() was 0x180 and now it is 0xa0.)
+
+commit fb2a0cee0afc14157c9793864a1e6a43884047bd
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:15:04 2012 +0100
+
+    sched, autogroup
+
+commit c0b5db42ecd9ef79715c6040740cfcae5cf40d8e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:09:32 2012 +0100
+
+    Reduce min voltage to 925mV
+
+commit f1163e776d05f910f99a6284a08e274ef8b50eb8
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:07:55 2012 +0100
+
+    Update compile script and fix typo
+
+commit 958f0829ff0a76b3e1ad3c900f10a9e5464282ba
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:05:42 2012 +0100
+
+    Backported vzalloc to better support zram (faux123)
+
+commit 64f6736bfda1219fd84ce70a87b4281da3c86702
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:02:32 2012 +0100
+
+    Compile zram as module
+    
+    zram needs to be a module in order to be able to work
+
+commit 3d0376888a286cee3bf16e038772c261f0051a90
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:59:25 2012 +0100
+
+    implemented support for CyanogenMod Performance settings to change the max CPU and min CPU frequency
+
+commit 03743fba4e5ee529bcd860e6031670ed00995cd1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:49:12 2012 +0100
+
+    missing genlock header file
+
+commit 655b7e6ce4956d770981d710f75a834816a559dd
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:40:26 2012 +0100
+
+    Update to lulzactive V2 Thanks to tegrak.
+    Thanks to gokhanmoral for this updated version of Tegrak's lulzactive governor that fixes the "permanent sleep when screen is off" bug with my update3 based sources.
+
 commit d273d6c1328d593780fdc823c55e0f133b9d844a
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 11:28:45 2012 +0100
