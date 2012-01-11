@@ -518,6 +518,8 @@ struct thread_group_cputimer {
 	spinlock_t lock;
 };
 
+struct autogroup;
+
 /*
  * NOTE! "signal_struct" does not have it's own
  * locking, because a shared signal_struct always
@@ -584,6 +586,10 @@ struct signal_struct {
 	int leader;
 
 	struct tty_struct *tty; /* NULL if no tty */
+
+#ifdef CONFIG_SCHED_AUTOGROUP
+	struct autogroup *autogroup;
+#endif
 
 	/*
 	 * Cumulative resource counters for dead threads in the group,
@@ -1183,11 +1189,8 @@ struct task_struct {
 #ifndef CONFIG_SCHED_BFS
 #ifdef CONFIG_SMP
 #ifdef __ARCH_WANT_UNLOCKED_CTXSW
-	bool oncpu;
+	int oncpu;
 #endif
-#endif
-#ifndef CONFIG_SCHED_BFS
-	bool on_rq;
 #endif
 #else /* CONFIG_SCHED_BFS */
 	int oncpu;
@@ -1202,7 +1205,7 @@ struct task_struct {
 	u64 last_ran;
 	u64 sched_time; /* sched_clock time spent running */
 #ifdef CONFIG_SMP
-	bool sticky; /* Soft affined flag */
+	int sticky; /* Soft affined flag */
 #endif
 	unsigned long rt_timeout;
 #else /* CONFIG_SCHED_BFS */
@@ -1530,7 +1533,7 @@ struct task_struct {
 };
 
 #ifdef CONFIG_SCHED_BFS
-extern bool grunqueue_is_locked(void);
+extern int grunqueue_is_locked(void);
 extern void grq_unlock_wait(void);
 extern void cpu_scaling(int cpu);
 extern void cpu_nonscaling(int cpu);
@@ -1550,14 +1553,14 @@ static inline void tsk_cpus_current(struct task_struct *p)
 
 static inline void print_scheduler_version(void)
 {
-	printk(KERN_INFO"BFS CPU scheduler v0.413 by Con Kolivas.\n");
+	printk(KERN_INFO"BFS CPU scheduler v0.404 by Con Kolivas.\n");
 }
 
-static inline bool iso_task(struct task_struct *p)
+static inline int iso_task(struct task_struct *p)
 {
 	return (p->policy == SCHED_ISO);
 }
-extern void remove_cpu(int cpu);
+extern void remove_cpu(unsigned long cpu);
 #else /* CFS */
 extern int runqueue_is_locked(int cpu);
 static inline void cpu_scaling(int cpu)
@@ -1589,12 +1592,12 @@ static inline void print_scheduler_version(void)
 	printk(KERN_INFO"CFS CPU scheduler.\n");
 }
 
-static inline bool iso_task(struct task_struct *p)
+static inline int iso_task(struct task_struct *p)
 {
-	return false;
+	return 0;
 }
 
-static inline void remove_cpu(int cpu)
+static inline void remove_cpu(unsigned long cpu)
 {
 }
 #endif /* CONFIG_SCHED_BFS */
@@ -2021,6 +2024,24 @@ int sched_rt_handler(struct ctl_table *table, int write,
 		loff_t *ppos);
 
 extern unsigned int sysctl_sched_compat_yield;
+
+#ifdef CONFIG_SCHED_AUTOGROUP
+extern unsigned int sysctl_sched_autogroup_enabled;
+
+extern void sched_autogroup_create_attach(struct task_struct *p);
+extern void sched_autogroup_detach(struct task_struct *p);
+extern void sched_autogroup_fork(struct signal_struct *sig);
+extern void sched_autogroup_exit(struct signal_struct *sig);
+#ifdef CONFIG_PROC_FS
+extern void proc_sched_autogroup_show_task(struct task_struct *p, struct seq_file *m);
+extern int proc_sched_autogroup_set_nice(struct task_struct *p, int *nice);
+#endif
+#else
+static inline void sched_autogroup_create_attach(struct task_struct *p) { }
+static inline void sched_autogroup_detach(struct task_struct *p) { }
+static inline void sched_autogroup_fork(struct signal_struct *sig) { }
+static inline void sched_autogroup_exit(struct signal_struct *sig) { }
+#endif
 
 #ifdef CONFIG_RT_MUTEXES
 extern int rt_mutex_getprio(struct task_struct *p);
@@ -2536,21 +2557,21 @@ extern void signal_wake_up(struct task_struct *t, int resume_stopped);
  */
 #ifdef CONFIG_SMP
 
-static inline int task_cpu(const struct task_struct *p)
+static inline unsigned int task_cpu(const struct task_struct *p)
 {
 	return task_thread_info(p)->cpu;
 }
 
-extern void set_task_cpu(struct task_struct *p, int cpu);
+extern void set_task_cpu(struct task_struct *p, unsigned int cpu);
 
 #else
 
-static inline int task_cpu(const struct task_struct *p)
+static inline unsigned int task_cpu(const struct task_struct *p)
 {
 	return 0;
 }
 
-static inline void set_task_cpu(struct task_struct *p, int cpu)
+static inline void set_task_cpu(struct task_struct *p, unsigned int cpu)
 {
 }
 
