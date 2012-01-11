@@ -1,1 +1,1 @@
-#define UTS_RELEASE "2.6.35.14-fikret_LEO_aosp_r1.20+"
+#define UTS_RELEASE "2.6.35.14-fikret_LEO_aosp_r1.20_CALLREC+"
