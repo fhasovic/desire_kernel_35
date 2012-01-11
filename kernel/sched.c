@@ -81,7 +81,7 @@
 #include <asm/irq_regs.h>
 
 #include "sched_cpupri.h"
-
+#include "sched_autogroup.h"
 #define CREATE_TRACE_POINTS
 #include <trace/events/sched.h>
 
@@ -271,6 +271,10 @@ struct task_group {
 	struct task_group *parent;
 	struct list_head siblings;
 	struct list_head children;
+
+#ifdef CONFIG_SCHED_AUTOGROUP
+	struct autogroup *autogroup;
+#endif
 };
 
 #define root_task_group init_task_group
@@ -619,7 +623,7 @@ static inline int cpu_of(struct rq *rq)
  */
 static inline struct task_group *cgroup_task_group(struct task_struct *p)
 {
-	struct task_group *tg;	
+	struct task_group *tg;
 	struct cgroup_subsys_state *css;
 
 	css = task_subsys_state_check(p, cpu_cgroup_subsys_id,
@@ -627,29 +631,25 @@ static inline struct task_group *cgroup_task_group(struct task_struct *p)
 	tg = container_of(css, struct task_group, css);
 	return tg;
 }
-
 static inline struct task_group *task_group(struct task_struct *p)
 {
 	struct task_group *tg;
+ 	tg = cgroup_task_group(p); 
 
-	tg = cgroup_task_group(p);
 	return autogroup_task_group(p, tg);
+}
 
- }
 /* Change a task's cfs_rq and parent entity if it moves across CPUs/groups */
 static inline void set_task_rq(struct task_struct *p, unsigned int cpu)
 {
-#if defined(CONFIG_FAIR_GROUP_SCHED) || defined(CONFIG_RT_GROUP_SCHED)
-	struct task_group *tg = task_group(p);
-#endif
 #ifdef CONFIG_FAIR_GROUP_SCHED
-	p->se.cfs_rq = tg->cfs_rq[cpu];
-	p->se.parent = tg->se[cpu];
+	p->se.cfs_rq = task_group(p)->cfs_rq[cpu];
+	p->se.parent = task_group(p)->se[cpu];
 #endif
 
 #ifdef CONFIG_RT_GROUP_SCHED
-	p->rt.rt_rq  = tg->rt_rq[cpu];
-	p->rt.parent = tg->rt_se[cpu];
+	p->rt.rt_rq  = task_group(p)->rt_rq[cpu];
+	p->rt.parent = task_group(p)->rt_se[cpu];
 #endif
 }
 
@@ -2010,6 +2010,7 @@ static void deactivate_task(struct rq *rq, struct task_struct *p, int flags)
 #include "sched_idletask.c"
 #include "sched_fair.c"
 #include "sched_rt.c"
+#include "sched_autogroup.c"
 #ifdef CONFIG_SCHED_DEBUG
 # include "sched_debug.c"
 #endif
@@ -7832,6 +7833,8 @@ void __init sched_init(void)
 	list_add(&init_task_group.list, &task_groups);
 	INIT_LIST_HEAD(&init_task_group.children);
 
+	autogroup_init(&init_task);
+
 #endif /* CONFIG_CGROUP_SCHED */
 
 #if defined CONFIG_FAIR_GROUP_SCHED && defined CONFIG_SMP
@@ -8292,6 +8295,7 @@ static void free_sched_group(struct task_group *tg)
 {
 	free_fair_sched_group(tg);
 	free_rt_sched_group(tg);
+	autogroup_free(tg);
 	kfree(tg);
 }
 
