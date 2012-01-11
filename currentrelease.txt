@@ -1,3 +1,9 @@
+commit 4fef2a6024726c341249df83c821e1023c7c0b45
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:28:58 2012 +0100
+
+    Fix audio levels
+
 commit ade1f7047af5c5cfa200cc05d0d5055827d55f62
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 21:25:53 2012 +0100
