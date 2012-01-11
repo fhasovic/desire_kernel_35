@@ -1,3 +1,22 @@
+commit 5a56b76be2806313c1005ec82132e9c933c0b7b7
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:53:01 2012 +0100
+
+    sched: Fix the irqtime code to deal with u64 wraps
+    
+    Some ARM systems have a short sched_clock() [ which needs to be fixed
+    too ], but this exposed a bug in the irq_time code as well, it doesn't
+    deal with wraps at all.
+    
+    Fix the irq_time code to deal with u64 wraps by re-writing the code to
+    only use delta increments, which avoids the whole issue.
+
+commit 1c58bfd9bc66bd1a6c097fb71e160d27f0473581
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:37:45 2012 +0100
+
+    Sched: fix skip_clock_update optimization
+
 commit 4fef2a6024726c341249df83c821e1023c7c0b45
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 21:28:58 2012 +0100
