@@ -1,3 +1,59 @@
+commit 471256903a711b63910a20fb03f64f2fd10162e9
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:52:42 2012 +0100
+
+    Reverted eMMC, bma150 mutex, and base power change.
+
+commit 394cb7e6aa0eb6f6aecc63571029af8eceba90d4
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:42:43 2012 +0100
+
+    AutoGroup fix
+
+commit 76b9f22731749274d9c4b51ee99877697430cb53
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:39:19 2012 +0100
+
+    Added AutoGroup to the defconfig
+
+commit 393c89f998c639940cbdd90a4ae15e3c75ea2f4f
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:37:09 2012 +0100
+
+    Revert "Replace PPP BKL with mutex"
+
+commit 670ee4eecf2c216a9ae75254627f9c87a3e4e80c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:35:22 2012 +0100
+
+    Patched Autogroup up
+
+commit 025ace8679329953eae88a0441677198a78e1180
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:29:26 2012 +0100
+
+    sched: Add 'autogroup' scheduling feature
+    
+    Originally by Mike Galbraith
+
+commit 08ccaf5b5268c7848d8173449265b587c3164305
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:14:35 2012 +0100
+
+    ARM: Optimize swahb32() byteswap helper for v6 and above
+
+commit e15aa94c4fca2e1409d2e73ca47b42e7fb1f3acc
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:03:30 2012 +0100
+
+    Mutex the lock/unlock of BMA150
+
+commit 4e7231bc15124912f9d0fde9f785062cc3fa4330
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:01:05 2012 +0100
+
+    Bluetooth: Fix crash with quirky BT dongles with sound
+
 commit 17c708d2dfa11d3c9ea62bf3e65d445ef0569073
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 14:59:04 2012 +0100
