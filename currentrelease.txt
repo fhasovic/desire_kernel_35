@@ -1,3 +1,21 @@
+commit 326d5490b4ec4ae3fa3f15c46cc7b2a7f766242e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:56:06 2012 +0100
+
+    Replace PPP BKL with mutex
+
+commit 53e5b6c9eb6dd6fe5ae6db2deab968152d891e4f
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:54:38 2012 +0100
+
+    Put eMMC in sleep (cmd5) mode before suspend.
+
+commit 86fe6c5732de846dac6c710f560561988e641a35
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:47:14 2012 +0100
+
+    PM: Wait for completion of the parent resume before resuming.
+
 commit 3e7d9764ac60081cd9d2cc396e065ce499b56104
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 14:41:07 2012 +0100
