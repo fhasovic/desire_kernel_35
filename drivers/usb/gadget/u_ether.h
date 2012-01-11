@@ -62,6 +62,10 @@ struct gether {
 
 	/* hooks for added framing, as needed for RNDIS and EEM. */
 	u32				header_len;
+	/* NCM requires fixed size bundles */
+	bool				is_fixed;
+	u32				fixed_out_len;
+	u32				fixed_in_len;
 	struct sk_buff			*(*wrap)(struct gether *port,
 						struct sk_buff *skb);
 	int				(*unwrap)(struct gether *port,
@@ -82,6 +86,9 @@ struct gether {
 /* netdev setup/teardown as directed by the gadget driver */
 int gether_setup(struct usb_gadget *g, u8 ethaddr[ETH_ALEN]);
 void gether_cleanup(void);
+/* variant of gether_setup that allows customizing network device name */
+int gether_setup_name(struct usb_gadget *g, u8 ethaddr[ETH_ALEN],
+		const char *netname);
 
 /* connect/disconnect is handled by individual functions */
 struct net_device *gether_connect(struct gether *);

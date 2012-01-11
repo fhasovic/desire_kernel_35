@@ -1,3 +1,10 @@
+commit e0be97d9cff6a2a85f3b92f64725ec7e9556eb00
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 20:37:20 2012 +0100
+
+    -Enabled call recording and fixed compile errors (thanks to marc)
+    -Add Wifi MAC changes from tytung's kernel
+
 commit 471256903a711b63910a20fb03f64f2fd10162e9
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 15:52:42 2012 +0100
