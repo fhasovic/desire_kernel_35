@@ -1,3 +1,41 @@
+commit 3e7d9764ac60081cd9d2cc396e065ce499b56104
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:41:07 2012 +0100
+
+    lowered wifi to connect a low signal -108 (bananacakes)
+
+commit ec0d7308b171db06623e5e52eec0b5b84b2dbf07
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:39:27 2012 +0100
+
+    WIFI PM=FAST in standby (bananacakes)
+
+commit d1f316179aced79b0b7edfa3f7888e51c4fb9a4a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:34:54 2012 +0100
+
+    msm: Add sysfs interface for mfreq
+    
+    Add mfreq interface in sysfs.  This forces the system to use the
+    maximum CPU clock on all CPU cores.
+    (mfreq=1 enables, mfreq=0 disables)
+
+commit 2de609c9259872e13a2e3583dd069771169f711e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:28:33 2012 +0100
+
+    INIT_COMPLETION should be used for repeated reset of completion
+    
+    object after init_completion has been done once. init_completion
+    reinitalizes the head of the list which could be bad if there are
+    completion objects already waiting.
+
+commit 0fa5b1607f15b59fc6895e92779f6cbdae9c46b5
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:26:22 2012 +0100
+
+    msm: cpufreq: Do not call a cpu transition if selecting the same speed.
+
 commit 9aa605b2422755bcf0f72840bee262246371a115
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 12:59:04 2012 +0100
