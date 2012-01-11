@@ -1,3 +1,15 @@
+commit ade1f7047af5c5cfa200cc05d0d5055827d55f62
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:25:53 2012 +0100
+
+    adjust audio gain
+
+commit 6f7e10cf95f551af775ea47a0ee534f00c0b1d8d
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:23:45 2012 +0100
+
+    some fixes
+
 commit ba40b73be87f969e089dc7d17758b25f854d715a
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 20:48:36 2012 +0100
