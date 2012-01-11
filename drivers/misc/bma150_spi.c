@@ -265,6 +265,7 @@ static int __spi_bma150_set_mode(char mode)
 	return ret;
 }
 
+static DEFINE_MUTEX(bma150_lock);
 
 static int spi_bma150_open(struct inode *inode, struct file *file)
 {
@@ -276,7 +277,7 @@ static int spi_bma150_release(struct inode *inode, struct file *file)
 	return 0;
 }
 
-static int spi_bma150_ioctl(struct inode *inode, struct file *file, unsigned int cmd,
+static long spi_bma150_ioctl(struct inode *inode, struct file *file, unsigned int cmd,
 	   unsigned long arg)
 {
 
@@ -311,26 +312,31 @@ static int spi_bma150_ioctl(struct inode *inode, struct file *file, unsigned int
 		break;
 	}
 
+	mutex_lock(&bma150_lock);
 	switch (cmd) {
 	case BMA_IOCTL_INIT:
 		ret = spi_gsensor_init_hw();
 		if (ret < 0)
-			return ret;
+			goto err;
 		break;
 
 	case BMA_IOCTL_READ:
-		if (rwbuf[0] < 1)
+		if (rwbuf[0] < 1) {
 			return -EINVAL;
+			goto err;
+		}
 		ret = spi_gsensor_read(&rwbuf[1]);
 		if (ret < 0)
-			return ret;
+			goto err;
 		break;
 	case BMA_IOCTL_WRITE:
-		if (rwbuf[0] < 2)
+		if (rwbuf[0] < 2) {
 			return -EINVAL;
+			goto err;
+		}
 		ret = spi_gsensor_write(&rwbuf[1]);
 		if (ret < 0)
-			return ret;
+			goto err;
 		break;
 	case BMA_IOCTL_WRITE_CALI_VALUE:
 		this_pdata->gs_kvalue = kbuf;
@@ -338,7 +344,7 @@ static int spi_bma150_ioctl(struct inode *inode, struct file *file, unsigned int
 	case BMA_IOCTL_READ_ACCELERATION:
 		ret = spi_bma150_TransRBuff(&buf[0]);
 		if (ret < 0)
-			return ret;
+			goto err;
 		break;
 	case BMA_IOCTL_READ_CALI_VALUE:
 		if ((this_pdata->gs_kvalue & (0x67 << 24)) != (0x67 << 24)) {
@@ -384,9 +390,10 @@ static int spi_bma150_ioctl(struct inode *inode, struct file *file, unsigned int
 		break;
 
 	default:
-		return -ENOTTY;
+		ret = -ENOTTY;
+		goto err;
 	}
-
+	mutex_unlock(&bma150_lock);
 	switch (cmd) {
 	case BMA_IOCTL_READ:
 		toRbuf = &rwbuf[1];
@@ -422,6 +429,9 @@ static int spi_bma150_ioctl(struct inode *inode, struct file *file, unsigned int
 	}
 
 	return 0;
+err:
+	mutex_unlock(&bma150_lock);
+	return ret;
 }
 
 static struct file_operations spi_bma_fops = {

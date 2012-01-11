@@ -1,3 +1,9 @@
+commit 17c708d2dfa11d3c9ea62bf3e65d445ef0569073
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:59:04 2012 +0100
+
+    fix:PM: Wait for completion of the parent resume before resuming.
+
 commit 326d5490b4ec4ae3fa3f15c46cc7b2a7f766242e
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 14:56:06 2012 +0100
