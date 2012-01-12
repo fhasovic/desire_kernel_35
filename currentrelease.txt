@@ -1,3 +1,39 @@
+commit a2b83316a5beeba4972e32d1d2ecf85c37209383
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:06:59 2012 +0100
+
+    wait Add wait_io_event_interruptible and friends
+
+commit cec8772e8a3c7a10e4fed4ae2d58c65221e2f5c3
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:05:08 2012 +0100
+
+    ARM: Stop irqsoff trace on return to user
+
+commit d472031c70a354dcf57d00c6c67f64bd22a242d4
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:02:30 2012 +0100
+
+    mm: Tweak Pagewriteback
+
+commit 0160015a7bbabd519eda58864db3ef89c0bb9ac7
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:00:25 2012 +0100
+
+    Fixed: ext4 disk write performance regression
+
+commit 88da2f9bfe8b3103eeda676316c41f516fbabe26
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 19:56:43 2012 +0100
+
+    init/calibrate.c backport from 3.0
+
+commit 6667d39eef21c98458e3edb22e179665499cc420
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 19:54:13 2012 +0100
+
+    ext4: add cleancache support
+
 commit 5988677cd8f005efdc364ded6f5df76c8f1c4bde
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Thu Jan 12 11:13:43 2012 +0100
