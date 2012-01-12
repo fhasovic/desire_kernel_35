@@ -1,3 +1,10 @@
+commit 5988677cd8f005efdc364ded6f5df76c8f1c4bde
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 11:13:43 2012 +0100
+
+    Added QTAGUID, changes for ICS compatibility, netfilters and probably a lot more
+    Added missing files from previous commits
+
 commit 42a28dca6e9f45cb2cf0951ddf10560c358b4018
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Jan 11 22:18:10 2012 +0100
