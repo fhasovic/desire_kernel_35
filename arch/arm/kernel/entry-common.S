@@ -30,6 +30,10 @@ ret_fast_syscall:
 	tst	r1, #_TIF_WORK_MASK
 	bne	fast_work_pending
 
+	#if defined(CONFIG_IRQSOFF_TRACER)
+        asm_trace_hardirqs_on
+	#endif
+
 	/* perform architecture specific actions before user return */
 	arch_ret_to_user r1, lr
 
@@ -63,6 +67,9 @@ ret_slow_syscall:
 	tst	r1, #_TIF_WORK_MASK
 	bne	work_pending
 no_work_pending:
+#if defined(CONFIG_IRQSOFF_TRACER)
+   asm_trace_hardirqs_on
+#endif
 	/* perform architecture specific actions before user return */
 	arch_ret_to_user r1, lr
 
