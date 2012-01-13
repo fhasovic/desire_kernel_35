@@ -1,3 +1,9 @@
+commit 78bff13dee5e5a5012f3c03c05a0277f846a67f1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:18:14 2012 +0100
+
+    revert Switch to bcm4329_204
+
 commit a2b83316a5beeba4972e32d1d2ecf85c37209383
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Thu Jan 12 20:06:59 2012 +0100
