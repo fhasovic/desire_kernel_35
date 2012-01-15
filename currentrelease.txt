@@ -1,3 +1,10 @@
+commit 6225737fe8b18df4a770596354cfab3fe8bfd073
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 01:18:17 2012 +0100
+
+    Fix for RNDIS and native usb tethering
+    Specialize HTCLEO build for Cortex A8
+
 commit 83d0984ac7a5b9ef675e44fd07ef3537bb9a5bc4
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Fri Jan 13 11:02:19 2012 +0100
