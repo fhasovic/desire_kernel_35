@@ -1,3 +1,21 @@
+commit 18729f8ff8fb0fe06833a7eed15d53baad4c32f3
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:20:04 2012 +0100
+
+    added back OC up to 1.5GHz
+
+commit 619c02446fd215cac66bbbbbd1e0cbebc6f59315
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:15:29 2012 +0100
+
+    removed autogroup
+
+commit 896e7b391d42119efc606e23cd50bc6e4acf022b
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 17:02:15 2012 +0100
+
+    Removing autogroup
+
 commit 304fcc15d24c92f677e08e75fe6febfcd645ce42
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Jan 15 13:04:05 2012 +0100
