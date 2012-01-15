@@ -496,7 +496,7 @@ int android_switch_function(unsigned func)
 			!strcmp(f->name, "acm"))
 			f->hidden = 0;
 		else if ((func & (1 << USB_FUNCTION_RNDIS)) &&
-			!strcmp(f->name, "ether")) {
+			!strcmp(f->name, "rndis")) {
 			if (f->hidden) {
 				printk("%s: rndis perf lock\n", __func__);
 				wake_lock(&usb_rndis_idle_wake_lock);
@@ -592,10 +592,27 @@ void android_enable_function(struct usb_function *f, int enable)
 		/* We need to specify the COMM class in the device descriptor
 		* if we are using RNDIS.
 		*/
-		if (product_id == PID_RNDIS)
+		if (product_id == PID_RNDIS){
+	struct usb_function		*func;
+			if (enable)
+#ifdef CONFIG_USB_ANDROID_RNDIS_WCEIS
+				dev->cdev->desc.bDeviceClass = USB_CLASS_WIRELESS_CONTROLLER;
+#else
 			dev->cdev->desc.bDeviceClass = USB_CLASS_COMM;
-		else
+#endif
+			else
 			dev->cdev->desc.bDeviceClass = USB_CLASS_PER_INTERFACE;
+
+			/* Windows does not support other interfaces when RNDIS is enabled,
+			 * so we disable UMS when RNDIS is on.
+			 */
+			list_for_each_entry(func, &android_config_driver.functions, list) {
+				if (!strcmp(func->name, "usb_mass_storage")) {
+					func->hidden = enable;
+					break;
+				}
+			}
+		}
 #endif
 
 		if (product_id == PID_ECM || product_id == PID_ACM)

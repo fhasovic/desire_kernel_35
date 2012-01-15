@@ -1,3 +1,15 @@
+commit 83d0984ac7a5b9ef675e44fd07ef3537bb9a5bc4
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Fri Jan 13 11:02:19 2012 +0100
+
+    Add Wifi MAC changes from tytung's kernel
+
+commit 0a0eb945175c95d6a06136caf6b3d35c2dc62d82
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Fri Jan 13 10:25:07 2012 +0100
+
+    bcm4329: expose firmware_path to userland, backported from bcmdhd
+
 commit 78bff13dee5e5a5012f3c03c05a0277f846a67f1
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Thu Jan 12 20:18:14 2012 +0100
