@@ -65,7 +65,6 @@
 #include <linux/perf_event.h>
 #include <linux/posix-timers.h>
 #include <linux/user-return-notifier.h>
-#include <linux/sched.h>
 
 #include <asm/pgtable.h>
 #include <asm/pgalloc.h>

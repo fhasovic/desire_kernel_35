@@ -9,10 +9,10 @@ unsigned int __read_mostly sysctl_sched_autogroup_enabled = 1;
 static struct autogroup autogroup_default;
 static atomic_t autogroup_seq_nr;
 
-static void __init autogroup_init(struct task_struct *init_task)
+static void autogroup_init(struct task_struct *init_task)
 {
 	autogroup_default.tg = &init_task_group;
-	// init_task_group.autogroup = &autogroup_default;
+	init_task_group.autogroup = &autogroup_default;
 	kref_init(&autogroup_default.kref);
 	init_rwsem(&autogroup_default.lock);
 	init_task->signal->autogroup = &autogroup_default;
@@ -38,20 +38,6 @@ static inline void autogroup_kref_put(struct autogroup *ag)
 static inline struct autogroup *autogroup_kref_get(struct autogroup *ag)
 {
 	kref_get(&ag->kref);
-	return ag;
-}
-
-static inline struct autogroup *autogroup_task_get(struct task_struct *p)
-{
-	struct autogroup *ag;
-	unsigned long flags;
-
-	if (!lock_task_sighand(p, &flags))
-		return autogroup_kref_get(&autogroup_default);
-
-	ag = autogroup_kref_get(p->signal->autogroup);
-	unlock_task_sighand(p, &flags);
-
 	return ag;
 }
 
@@ -106,7 +92,8 @@ task_wants_autogroup(struct task_struct *p, struct task_group *tg)
 	return true;
 }
 
-static inline struct task_group *autogroup_task_group(struct task_struct *p, struct task_group *tg)
+static inline struct task_group *
+autogroup_task_group(struct task_struct *p, struct task_group *tg)
 {
 	int enabled = ACCESS_ONCE(sysctl_sched_autogroup_enabled);
 
@@ -116,7 +103,8 @@ static inline struct task_group *autogroup_task_group(struct task_struct *p, str
 	return tg;
 }
 
-static void autogroup_move_group(struct task_struct *p, struct autogroup *ag)
+static void
+autogroup_move_group(struct task_struct *p, struct autogroup *ag)
 {
 	struct autogroup *prev;
 	struct task_struct *t;
@@ -132,15 +120,11 @@ static void autogroup_move_group(struct task_struct *p, struct autogroup *ag)
 
 	p->signal->autogroup = autogroup_kref_get(ag);
 
-	if (!ACCESS_ONCE(sysctl_sched_autogroup_enabled))
-		goto out;
-
 	t = p;
 	do {
 		sched_move_task(t);
 	} while_each_thread(p, t);
 
-out:
 	unlock_task_sighand(p, &flags);
 	autogroup_kref_put(prev);
 }
@@ -165,9 +149,12 @@ EXPORT_SYMBOL(sched_autogroup_detach);
 
 void sched_autogroup_fork(struct signal_struct *sig)
 {
-	sig->autogroup = autogroup_task_get(current);
+struct task_struct *p = current;
+
+	spin_lock_irq(&p->sighand->siglock);
+	sig->autogroup = autogroup_kref_get(p->signal->autogroup);
+	spin_unlock_irq(&p->sighand->siglock);
 }
-EXPORT_SYMBOL(sched_autogroup_fork);
 
 void sched_autogroup_exit(struct signal_struct *sig)
 {
@@ -183,42 +170,9 @@ static int __init setup_autogroup(char *str)
 
 __setup("noautogroup", setup_autogroup);
 
-static DEFINE_MUTEX(autogroup_sysctl_mutex);
-
-int sysctl_sched_autogroup_handler(struct ctl_table *table, int write,
-		void __user *buffer, size_t *lenp,
-		loff_t *ppos)
-{
-	int old_value, ret;
-	struct task_struct *p, *n;
-
-	mutex_lock(&autogroup_sysctl_mutex);
-
-	old_value = sysctl_sched_autogroup_enabled;
-	ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-
-	if (ret || !write || (old_value == sysctl_sched_autogroup_enabled))
-		goto out_unlock;
-
-	read_lock_irq(&tasklist_lock);
-	rcu_read_lock();
-
-	do_each_thread(n, p) {
-		if (cgroup_task_group(p) == &root_task_group)
-			sched_move_task(p);
-	} while_each_thread(n, p);
-
-	rcu_read_unlock();
-	read_unlock_irq(&tasklist_lock);
-
-out_unlock:
-	mutex_unlock(&autogroup_sysctl_mutex);
-
-	return ret;
-}
-
 #ifdef CONFIG_PROC_FS
 
+/* Called with siglock held. */
 int proc_sched_autogroup_set_nice(struct task_struct *p, int *nice)
 {
 	static unsigned long next = INITIAL_JIFFIES;
@@ -240,7 +194,7 @@ int proc_sched_autogroup_set_nice(struct task_struct *p, int *nice)
 		return -EAGAIN;
 
 	next = HZ / 10 + jiffies;
-	ag = autogroup_task_get(p);
+	ag = autogroup_kref_get(p->signal->autogroup);
 
 	down_write(&ag->lock);
 	err = sched_group_set_shares(ag->tg, prio_to_weight[*nice + 20]);
@@ -255,7 +209,7 @@ int proc_sched_autogroup_set_nice(struct task_struct *p, int *nice)
 
 void proc_sched_autogroup_show_task(struct task_struct *p, struct seq_file *m)
 {
-	struct autogroup *ag = autogroup_task_get(p);
+	struct autogroup *ag = autogroup_kref_get(p->signal->autogroup);
 
 	down_read(&ag->lock);
 	seq_printf(m, "/autogroup-%ld nice %d\n", ag->id, ag->nice);
@@ -268,11 +222,6 @@ void proc_sched_autogroup_show_task(struct task_struct *p, struct seq_file *m)
 #ifdef CONFIG_SCHED_DEBUG
 static inline int autogroup_path(struct task_group *tg, char *buf, int buflen)
 {
-	int enabled = ACCESS_ONCE(sysctl_sched_autogroup_enabled);
-
-	if (!enabled || !tg->autogroup)
-		return 0;
-
 	return snprintf(buf, buflen, "%s-%ld", "/autogroup", tg->autogroup->id);
 }
 #endif /* CONFIG_SCHED_DEBUG */
