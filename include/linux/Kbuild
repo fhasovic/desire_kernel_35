@@ -169,6 +169,8 @@ header-y += utime.h
 header-y += veth.h
 header-y += videotext.h
 header-y += x25.h
+header-y += if_pppolac.h
+header-y += if_pppopns.h
 
 unifdef-y += acct.h
 unifdef-y += adb.h
