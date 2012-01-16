@@ -1192,10 +1192,11 @@ static pgoff_t ext4_num_dirty_pages(struct inode *inode, pgoff_t idx,
 				break;
 			idx++;
 			num++;
-			if (num >= max_pages) {
+			if (num >= max_pages)
+			{
 				done = 1;
 				break;
-		}
+			}
 		}
 		pagevec_release(&pvec);
 	}
@@ -2982,7 +2983,7 @@ static int ext4_da_writepages(struct address_space *mapping,
  	if (!range_cyclic && range_whole) {
  		if (wbc->nr_to_write == LLONG_MAX)
  			desired_nr_to_write = wbc->nr_to_write;
-	else
+ 		else
  			desired_nr_to_write = wbc->nr_to_write * 8;
  	} else
 		desired_nr_to_write = ext4_num_dirty_pages(inode, index,
@@ -3270,7 +3271,7 @@ static int ext4_da_write_end(struct file *file,
 	 */
 
 	new_i_size = pos + copied;
-	if (copied && new_i_size > EXT4_I(inode)->i_disksize) {
+	if (new_i_size > EXT4_I(inode)->i_disksize) {
 		if (ext4_da_should_update_i_disksize(page, end)) {
 			down_write(&EXT4_I(inode)->i_data_sem);
 			if (new_i_size > EXT4_I(inode)->i_disksize) {
@@ -3802,11 +3803,10 @@ static void ext4_end_io_dio(struct kiocb *iocb, loff_t offset,
  		  iocb->private, io_end->inode->i_ino, iocb, offset,
 		  size);
 
-iocb->private = NULL;
-
 	/* if not aio dio with unwritten extents, just free io and return */
 	if (io_end->flag != EXT4_IO_UNWRITTEN){
 		ext4_free_io_end(io_end);
+		iocb->private = NULL;
 out:
 		if (is_async)
 			aio_complete(iocb, ret, 0);
