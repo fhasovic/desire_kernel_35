@@ -1,3 +1,15 @@
+commit db691bd61111b35d4982c62e63c70f2bac640b40
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:24:21 2012 +0100
+
+    Readahead change
+
+commit d9ccb9656418efb5622fb933998ef040bd516e4e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:23:23 2012 +0100
+
+    KGSL change
+
 commit 18729f8ff8fb0fe06833a7eed15d53baad4c32f3
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Jan 15 18:20:04 2012 +0100
