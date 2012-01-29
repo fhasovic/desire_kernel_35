@@ -1,39 +1,28 @@
 #
-# WiMAX LAN device configuration
+# WiMAX LAN device drivers configuration
 #
 
-menuconfig WIMAX
-	tristate "WiMAX Wireless Broadband support"
-	depends on RFKILL || !RFKILL
-	help
 
-	  Select to configure support for devices that provide
-	  wireless broadband connectivity using the WiMAX protocol
-	  (IEEE 802.16).
+comment "Enable WiMAX (Networking options) to see the WiMAX drivers"
+	depends on WIMAX = n
 
-	  Please note that most of these devices require signing up
-	  for a service plan with a provider.
+if WIMAX
 
-	  The different WiMAX drivers can be enabled in the menu entry
+menu "WiMAX Wireless Broadband devices"
 
-	  Device Drivers > Network device support > WiMAX Wireless
-	  Broadband devices
+source "drivers/net/wimax/i2400m/Kconfig"
+source "drivers/net/wimax/SQN/Kconfig"
 
-	  If unsure, it is safe to select M (module).
+endmenu
 
-config WIMAX_DEBUG_LEVEL
-	int "WiMAX debug level"
-	depends on WIMAX
-	default 8
-	help
+endif
+config WIMAX_SERIAL_MSM
+	tristate "WIMAX uart debug console support"
+	depends on WIMAX && SERIAL_MSM
+	default n
+	---help---
+	  This module adds support for wimax chip console based on
+	  UART port interface.
 
-	  Select the maximum debug verbosity level to be compiled into
-	  the WiMAX stack code.
+	  Need define CONFIG_SERIAL_MSM as pre-condition to enable BSP UART.
 
-	  By default, debug messages are disabled at runtime and can
-	  be selectively enabled for different parts of the code using
-	  the sysfs debug-levels file.
-
-	  If set at zero, this will compile out all the debug code.
-
-	  It is recommended that it is left at 8.
