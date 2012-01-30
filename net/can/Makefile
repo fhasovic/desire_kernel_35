@@ -1,20 +1,12 @@
 #
-#  Makefile for the Linux Controller Area Network drivers.
+#  Makefile for the Linux Controller Area Network core.
 #
 
-obj-$(CONFIG_CAN_VCAN)		+= vcan.o
+obj-$(CONFIG_CAN)	+= can.o
+can-objs		:= af_can.o proc.o
 
-obj-$(CONFIG_CAN_DEV)		+= can-dev.o
-can-dev-y			:= dev.o
+obj-$(CONFIG_CAN_RAW)	+= can-raw.o
+can-raw-objs		:= raw.o
 
-obj-y				+= usb/
-
-obj-$(CONFIG_CAN_SJA1000)	+= sja1000/
-obj-$(CONFIG_CAN_MSCAN)		+= mscan/
-obj-$(CONFIG_CAN_AT91)		+= at91_can.o
-obj-$(CONFIG_CAN_TI_HECC)	+= ti_hecc.o
-obj-$(CONFIG_CAN_MCP251X)	+= mcp251x.o
-obj-$(CONFIG_CAN_BFIN)		+= bfin_can.o
-obj-$(CONFIG_CAN_JANZ_ICAN3)	+= janz-ican3.o
-
-ccflags-$(CONFIG_CAN_DEBUG_DEVICES) := -DDEBUG
+obj-$(CONFIG_CAN_BCM)	+= can-bcm.o
+can-bcm-objs		:= bcm.o

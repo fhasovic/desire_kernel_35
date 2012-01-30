@@ -1,8 +1,14 @@
 
-obj-$(CONFIG_WIMAX_I2400M)	+= i2400m/
-obj-$(CONFIG_WIMAX_SQN)		+= SQN/
-obj-$(CONFIG_WIMAX_SQN)		+= wimaxdbg/
-obj-$(CONFIG_WIMAX_SQN)		+= wimaxuart/
+obj-$(CONFIG_WIMAX)		+= wimax.o
 
-# (from Sam Ravnborg) force kbuild to create built-in.o
-obj- := dummy.o
+wimax-y :=		\
+	id-table.o	\
+	op-msg.o	\
+	op-reset.o	\
+	op-rfkill.o	\
+	op-state-get.o	\
+	stack.o
+
+wimax-$(CONFIG_DEBUG_FS) += debugfs.o
+
+

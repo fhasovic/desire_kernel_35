@@ -1,92 +1,44 @@
-menu "CAN Device Drivers"
-	depends on CAN
+#
+# Controller Area Network (CAN) network layer core configuration
+#
 
-config CAN_VCAN
-	tristate "Virtual Local CAN Interface (vcan)"
-	depends on CAN
-	default N
+menuconfig CAN
+	depends on NET
+	tristate "CAN bus subsystem support"
 	---help---
-	  Similar to the network loopback devices, vcan offers a
-	  virtual local CAN interface.
+	  Controller Area Network (CAN) is a slow (up to 1Mbit/s) serial
+	  communications protocol which was developed by Bosch in
+	  1991, mainly for automotive, but now widely used in marine
+	  (NMEA2000), industrial, and medical applications.
+	  More information on the CAN network protocol family PF_CAN
+	  is contained in <Documentation/networking/can.txt>.
 
-	  This driver can also be built as a module.  If so, the module
-	  will be called vcan.
+	  If you want CAN support you should say Y here and also to the
+	  specific driver for your controller(s) below.
 
-config CAN_DEV
-	tristate "Platform CAN drivers with Netlink support"
-	depends on CAN
-	default Y
-	---help---
-	  Enables the common framework for platform CAN drivers with Netlink
-	  support. This is the standard library for CAN drivers.
-	  If unsure, say Y.
-
-config CAN_CALC_BITTIMING
-	bool "CAN bit-timing calculation"
-	depends on CAN_DEV
-	default Y
-	---help---
-	  If enabled, CAN bit-timing parameters will be calculated for the
-	  bit-rate specified via Netlink argument "bitrate" when the device
-	  get started. This works fine for the most common CAN controllers
-	  with standard bit-rates but may fail for exotic bit-rates or CAN
-	  source clock frequencies. Disabling saves some space, but then the
-	  bit-timing parameters must be specified directly using the Netlink
-	  arguments "tq", "prop_seg", "phase_seg1", "phase_seg2" and "sjw".
-	  If unsure, say Y.
-
-config CAN_AT91
-	tristate "Atmel AT91 onchip CAN controller"
-	depends on CAN_DEV && ARCH_AT91SAM9263
-	---help---
-	  This is a driver for the SoC CAN controller in Atmel's AT91SAM9263.
-
-config CAN_TI_HECC
-	depends on CAN_DEV && ARCH_OMAP3
-	tristate "TI High End CAN Controller"
-	---help---
-	  Driver for TI HECC (High End CAN Controller) module found on many
-	  TI devices. The device specifications are available from www.ti.com
-
-config CAN_MCP251X
-	tristate "Microchip MCP251x SPI CAN controllers"
-	depends on CAN_DEV && SPI && HAS_DMA
-	---help---
-	  Driver for the Microchip MCP251x SPI CAN controllers.
-
-config CAN_BFIN
-	depends on CAN_DEV && (BF534 || BF536 || BF537 || BF538 || BF539 || BF54x)
-	tristate "Analog Devices Blackfin on-chip CAN"
-	---help---
-	  Driver for the Analog Devices Blackfin on-chip CAN controllers
-
-	  To compile this driver as a module, choose M here: the
-	  module will be called bfin_can.
-
-config CAN_JANZ_ICAN3
-	tristate "Janz VMOD-ICAN3 Intelligent CAN controller"
-	depends on CAN_DEV && MFD_JANZ_CMODIO
-	---help---
-	  Driver for Janz VMOD-ICAN3 Intelligent CAN controller module, which
-	  connects to a MODULbus carrier board.
-
-	  This driver can also be built as a module. If so, the module will be
-	  called janz-ican3.ko.
-
-source "drivers/net/can/mscan/Kconfig"
-
-source "drivers/net/can/sja1000/Kconfig"
-
-source "drivers/net/can/usb/Kconfig"
-
-config CAN_DEBUG_DEVICES
-	bool "CAN devices debugging messages"
+config CAN_RAW
+	tristate "Raw CAN Protocol (raw access with CAN-ID filtering)"
 	depends on CAN
 	default N
 	---help---
-	  Say Y here if you want the CAN device drivers to produce a bunch of
-	  debug messages to the system log.  Select this if you are having
-	  a problem with CAN support and want to see more of what is going
-	  on.
+	  The raw CAN protocol option offers access to the CAN bus via
+	  the BSD socket API. You probably want to use the raw socket in
+	  most cases where no higher level protocol is being used. The raw
+	  socket has several filter options e.g. ID masking / error frames.
+	  To receive/send raw CAN messages, use AF_CAN with protocol CAN_RAW.
 
-endmenu
+config CAN_BCM
+	tristate "Broadcast Manager CAN Protocol (with content filtering)"
+	depends on CAN
+	default N
+	---help---
+	  The Broadcast Manager offers content filtering, timeout monitoring,
+	  sending of RTR frames, and cyclic CAN messages without permanent user
+	  interaction. The BCM can be 'programmed' via the BSD socket API and
+	  informs you on demand e.g. only on content updates / timeouts.
+	  You probably want to use the bcm socket in most cases where cyclic
+	  CAN messages are used on the bus (e.g. in automotive environments).
+	  To use the Broadcast Manager, use AF_CAN with protocol CAN_BCM.
+
+
+source "drivers/net/can/Kconfig"
