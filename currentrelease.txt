@@ -1,573 +1,721 @@
-commit edf1f3e9513e38fc6174d19680652a78f53b05a0
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 09:54:43 2012 -0800
-
-    fix compile issue
-
-commit 3c72dac62290ce358dd69fd52050a057bc5d1342
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 01:34:03 2012 -0800
-
-    Add a TINY_PREEMPT_RCU
-    
-    This patch implements a small-memory-footprint uniprocessor-only
-    implementation of preemptible RCU.  This implementation uses but a
-    single blocked-tasks list rather than the combinatorial number used per
-    leaf rcu_node by TREE_PREEMPT_RCU, which reduces memory consumption and
-    greatly simplifies processing.  This version also takes advantage of
-    uniprocessor execution to accelerate grace periods in the case where
-    there are no readers.
-    
-    The general design is otherwise broadly similar to that of TREE_PREEMPT_RCU.
-    
-    This version passes moderate rcutorture testing.
-    
-    Signed-off-by: Paul E. McKenney <paulmck@linux.vnet.ibm.com>
-
-commit 180d7c28a77acb24ed5e4b6997368b9c3c43c456
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 01:20:53 2012 -0800
-
-    Make sure stack is 64-bit aligned
+commit ee948e4c11e7e02745db8170d61839d5ee88e1b0
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 30 10:36:42 2012 +0100
 
-commit d027c6b9497d0a02e838b96d7e93828683ac7fa9
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 01:18:11 2012 -0800
+    More source fixes
 
-    Added Jhash3
+commit 0471a6092491a1d978b86f3084d1cb58a5255eef
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 29 15:09:51 2012 +0100
 
-commit a704eb97e742c0dc3744299b99f136d710aa6b79
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 01:16:01 2012 -0800
+    Done awwful amount of work in stabilization, camera, removing stuff, implementing new features...
 
-    USB: f_mass_storage: Disable write cache support
-    
-    As part of mode sense CBW command, communicate to the
-    host that write cache support is enabled and due to this
-    during the write commnd, the host is asking for FUA and
-    because of this write performance is degrading. Hence during
-    mode sense command, intimate the host that write cache is not
-    supported.
-    
-    (cherry picked from commit a2da2c4)
-    
-    Change-Id: I6ec66ff11181eeb70d62d31b7ddfbbf87880a885
-    CRs-Fixed: 278310
-    Signed-off-by: Chiranjeevi Velempati <cvelempa@codeaurora.org>
+commit 8a56e7c9328f82bee0ef776c68c42ad23025b3b0
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:54:17 2012 +0100
 
-commit f1c5c2acaf4f49e939a05ecb8d74810521643b03
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 01:14:09 2012 -0800
+    cpufreq and omap transition latency tweaks (bananacakes)
 
-    Slight mod to i2c
+commit 06b6c0778bf06dd3873959c3851ee2c692087372
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:52:41 2012 +0100
 
-commit 575bd79b6b83b7f1579cd41846cb00fe843add9f
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 01:11:25 2012 -0800
+    nohz/sched: delay going tickless when CPU is loaded (bananacakes)
 
-    A small mod specific to qsd8250
+commit dda8fe43e8fa475f64c74e7dd7f51f5cca9be61e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:51:14 2012 +0100
 
-commit b97e313dbab3356dbbdddd24f604cfdbdae74847
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 01:05:18 2012 -0800
+    Added: support for custom rr_interval value
 
-    Disable PM debugging
+commit 3eda63112b792c1d692581969f95ce0301d2f475
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:48:44 2012 +0100
 
-commit 32c10f7854e88032a98ec7ad75eb134e6a9b9587
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Tue Jan 24 00:30:39 2012 -0800
+    penalise fork depth account threads (dorimanx)
 
-    Tweaked SmartAssV2 a bit
+commit 22bf5e9b66ce16d4f591fa6865a82b9e979427b8
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:44:31 2012 +0100
 
-commit 8b0a517e171af6550d57f611ebc315abd3ec433a
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 23 01:21:07 2012 -0800
+    Tweaked the min battery presentage before flush will not work.
 
-    msm: Increase the DMA consistent memory zone to 14MB
-    Increase the zone for mapping DMA memory on most platforms from 2MB
-        to the maximum 14MB. The actual memory comes from the normal pool, this
-        change just increases the virtual range where the memory can be mappped
-        (at the cost of 7 more 2MB pagetables).
+commit f1e944a754a587fb4a171619c1546d6f870466fb
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:42:52 2012 +0100
 
-commit 10b219d5c5a9468201c667b8891afccabd5b78ad
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 23 01:17:41 2012 -0800
+    TWEAK: sched - lower granularity (bananacakes)
 
-    Tweak to allow safer overcharge of battery
+commit d7800eafd22a5d866ba41471e4e055dc719bfa64
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:39:49 2012 +0100
 
-commit c54d6553845ca1fe155737ba921b2c3c4d2beda0
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 23 00:44:26 2012 -0800
+    Add: cleancache (dorimanx)
 
-    Removed remaining ext4 patch
+commit 4ca693142a8d9cbd0c674e775aafe22a0807370e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:34:13 2012 +0100
 
-commit 46c4d99511dc6578286fdd4a743debde839125fc
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 23 00:38:26 2012 -0800
+    ADD: Frontswap
 
-    Finish corrupted frame patch
+commit c73113c2aeaac4c8253da0ec1c8489de151c2e76
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:20:41 2012 +0100
 
-commit 7b1a2f1a893dc01661c0fb6307a6bd1d2b690bf1
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 23 00:20:31 2012 -0800
+    Increase write data timeout value for bad SDHC cards (bananacakes)
 
-    Reduced the board's expected power collapse etc to 96mhz
+commit 84abccd54e728239eb2f72e24f1b91c8dfaf8cf6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:18:17 2012 +0100
 
-commit 0c6adc9cee848fbb78d243d3b9c00f8de1002cd1
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 23 00:17:36 2012 -0800
+    Fix a race during freezing of TASK_STOPPED task (bananacakes)
 
-    Removed some stuff
+commit 246e989bd4847143ff2c487ce496f5b6b120513c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 23:15:55 2012 +0100
 
-commit 28cea5b93a35c38aeb543f406bfedca1b379b091
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 22 17:04:33 2012 -0800
+    mm: Avoid livelocking of WB_SYNC_ALL writeback (bananacakes)
 
-    Disable most debugging.  Should cut down on overhead.
+commit 864b3cb77c23448eb907dbec356b49433d7bd90e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 22:59:14 2012 +0100
 
-commit bbb83cdd743713216517b96280f04246b1237187
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 22 14:12:07 2012 -0800
+    Reverted KGSL change (CPU was stuck on 30% use and uevents used it, then phone will not return from sleep state.) (dorimanx)
 
-    Third times a charm?
+commit 3b770ad6fd0cda247bb5122104c3e35d59221f1d
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 22:57:12 2012 +0100
 
-commit 03fcb91b25ca6dc629280b939762e12dc9eceb35
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 22 14:04:07 2012 -0800
+    Changed some settings
 
-    Added 96mhz to the ACA undervolt table.
-    Enabled ACA undervolt table.  Fingers crossed.
+commit 51099ec7c3a1d4737af0f2126d21f91a07efd7d9
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 22:53:47 2012 +0100
 
-commit d1a37d7d13f616ac0d4e1ede23c166ad503cea32
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 22 13:58:49 2012 -0800
+    Added missing genlock.c (just in case)
 
-    Should be the final attack to get BT batt drain solution back in place
+commit eb14b547bb63922879fc8b54de5a41ae322823f6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 16 22:52:49 2012 +0100
 
-commit 2db23a46289c8fb995a07dd6238a3049900db22b
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 22 03:23:28 2012 -0800
+    Added missing genlock.c (just in case)
 
-    Getting crazy
+commit db691bd61111b35d4982c62e63c70f2bac640b40
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:24:21 2012 +0100
 
-commit 438be08e3de7bb59e85efe00995be0b74b9a51fb
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 22 02:55:40 2012 -0800
-
-    Lowered AXI sleep level
-
-commit a6eef0d2e513ac70b4d662e7eece1cda6e67f561
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 17:54:38 2012 -0800
-
-    Re-enabled AXI Screen Policy and changed version
-
-commit bf82e41d8daffe51a6d503b58fed3abf15f58969
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 17:10:11 2012 -0800
-
-    Changed compile optimizations further and updated bcm4329 source
-    so it won't through an error.
-
-commit bedb1969c2e77fc2a743421cb085b40145e71867
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 14:51:52 2012 -0800
-
-    Yep
-
-commit 716f0f487272c72a95fe247431107d688131f322
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 14:04:41 2012 -0800
-
-    Moved some stuff back in from 32
-
-commit cb1add358dbf026cfaa459102e5cf28c8944a624
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 13:58:19 2012 -0800
-
-    Changed to Tiny RCU
-
-commit 76f10d536fc012a8b164197b8f13ff64d1d3124b
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 13:53:51 2012 -0800
-
-    Little something
-
-commit 7b736796ddaa6dbe29f79bb086aa95905e1d5c40
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 13:41:49 2012 -0800
-
-    fix scaling_cur_freq (bananacakes)
-
-commit 777f00fdff1a07f35606f6893c72bc65b04f0af4
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 13:20:41 2012 -0800
-
-    Disabled the AXI Screen Policy
-
-commit 5f9fb8efc626ac608532999be12762042652156e
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 13:12:37 2012 -0800
-
-    Reenabled the schedstats etc and removed ext4 change
-
-commit 6728962fdbec3277824b445ee29fef624914a7e0
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 21 13:09:30 2012 -0800
-
-    Reverted Swappiness tunable lies
-
-commit 2a2bde4d9229f9e6ebcd03f43531c88d14bbacec
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Fri Jan 20 12:58:23 2012 -0800
-
-    Took out extra 128mhz entry.
-    Took out KGSL change
-
-commit c90766ac47c33e271edf0c66029ca3bbcd9944ef
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Fri Jan 20 12:05:16 2012 -0800
-
-    Enabled AXI Sleep Policy and HTC OffMode Alarm
-
-commit b7e6a143cd27179fdf0aa01e934762a0fe5fb79f
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Fri Jan 20 11:59:00 2012 -0800
-
-    Revert "blah blah blah"
-    
-    This reverts commit f709634cd4fce2d9b9c36fd465d6905663322bdc.
-
-commit f709634cd4fce2d9b9c36fd465d6905663322bdc
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Fri Jan 20 11:58:11 2012 -0800
-
-    blah blah blah
-
-commit 033210f0eb0a809f701a136a2d55acbf1d95b92a
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 22:29:11 2012 -0800
-
-    Modded the compiled copy as per request of Cope.  Goodbye oldschool SD method
-
-commit 75342231c13dfccdb0d8210803b904603f74e5db
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 22:27:00 2012 -0800
-
-    Gonna try the remaining portion of the old tytung bt drain fix.
-    
-    Hopefully won't break compatibility with some devices
-
-commit 713ff316b3e3d0498bbf1cc2111a1710a55a7d68
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 22:01:04 2012 -0800
-
-    Changed Lightsensor polling to 2.5 seconds
-
-commit 4950405e138ff78eade257df53129de9c89f8f62
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 21:58:27 2012 -0800
-
-    ACA Omega 35 Nonsense 1.10
-
-commit 563c178398dafb4e735bcc1fc95b8beb379bc6e7
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 21:56:58 2012 -0800
-
-    Swappiness the tunable lies. (marc1706 and ck)
-
-commit 0efb99214e28c8f345d79fa729138ff2bddb8c62
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 21:54:14 2012 -0800
-
-    Enable preempt by default and make people steer away from voluntary. (marc1706 and ck)
-
-commit a9135ce274c02308d775cb4a57b0900df74c84d0
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 21:51:41 2012 -0800
-
-    Disable unneeded parts in defconfig (marc1706)
-
-commit eb94fc9b5dff3284c56325f09dd4100cb08dfc26
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 21:50:13 2012 -0800
-
-    Stop kernel from spamming dmesg log while it vibrates (marc1706)
-
-commit 4057ba1945ff31b572d2dc88b02070e2b3f4a2c0
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 21:45:35 2012 -0800
-
-    Internet pass-through should be working now (marc1706)
-
-commit 450d99316d2edf4406f504157c30590b3f03ea9e
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 19 21:40:21 2012 -0800
-
-    ext4 performance patch from Eric Sandeen
-    Original commit by imoseyon commited by tiny4579:
-    https://github.com/tiny4579/gingertiny-v2/commit/ec9cf38500adfeeb6ef441a40a854ed3c08d69f2
-
-commit 2ab9e327ffdaf9753b25eccc006b321eacc82e43
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sat Jan 14 15:11:28 2012 -0800
-
-    Modded the opimization flags a bit
-    
-    Added back in the noncleancompile
-
-commit 1c8aa3dcba59e7cef57ecfc5f7df5a2fd657d42c
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Fri Jan 13 01:44:39 2012 -0800
-
-    Defconfig change.
-    
-    KGSL change
-    
     Readahead change
 
-commit 0b131b4262bc2d6710206f478b3c75f9fc8d6313
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 12 22:08:32 2012 -0800
+commit d9ccb9656418efb5622fb933998ef040bd516e4e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:23:23 2012 +0100
 
-    Revert "sched: Add 'autogroup' scheduling feature"
-    
-    This reverts commit b5d62d8abf5fa6b7443b3e07f0d06de0843ba2bc.
-    
-    Conflicts:
-    
-    	drivers/base/power/main.c
+    KGSL change
 
-commit 3e383fb7be800e2878f4c1e65591f8c38c8eb051
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 12 21:58:39 2012 -0800
+commit 18729f8ff8fb0fe06833a7eed15d53baad4c32f3
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:20:04 2012 +0100
 
-    Revert "Patched Autogroup up"
-    
-    This reverts commit 14394f15396585ab938ffa9774c82da412190293.
+    added back OC up to 1.5GHz
 
-commit 58e3c63a2cd1c8aa05c3ceae5bf197a98d5bad92
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 12 21:58:09 2012 -0800
+commit 619c02446fd215cac66bbbbbd1e0cbebc6f59315
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 18:15:29 2012 +0100
 
-    Revert "Added AutoGroup to the defconfig"
-    
-    This reverts commit 5486c07d86c1da7b323da0df8c3a35bdfe34d720.
-    
-    Revert "Added AutoGroup to the defconfig"
-    
-    This reverts commit 5486c07d86c1da7b323da0df8c3a35bdfe34d720.
+    removed autogroup
 
-commit 6ffd2ace4c062712498af67b9b349211dd510e85
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 12 21:57:08 2012 -0800
+commit 896e7b391d42119efc606e23cd50bc6e4acf022b
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 17:02:15 2012 +0100
 
-    Revert "AutoGroup:  Duh moment."
-    
-    This reverts commit c2f2a23873d19f5ab6bf0677a174173ce5d26d79.
-    
-    Revert "AutoGroup:  Duh moment."
-    
-    This reverts commit c2f2a23873d19f5ab6bf0677a174173ce5d26d79.
+    Removing autogroup
 
-commit c5da01ce1f87be5d667b47fe79d6f977491b4aa7
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 12 20:56:51 2012 -0800
+commit 304fcc15d24c92f677e08e75fe6febfcd645ce42
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 13:04:05 2012 +0100
 
+    Fix no sound bug when using bluetooth
+    
+    Source: http://review.cyanogenmod.com/#change,9758
+    
+    Original commit message:
+    qdsp6: Allow audio_rx_path_id to be zero, fixes Bluetooth
+    
+    In the refactoring done by commit 8913be80, the new adie_rx_path_enable
+    added a check for audio_rx_path_id!=0 that didn't exist before. It
+    becomes 0 for example when using Bluetooth voice dial. I found that
+    CAF's kernels also do this, but they make the same check around every
+    adie_proceed_to_stage() call throughout. Since we only have it in one
+    place, the audio can get into a confused state and stop working.
+    
+    This patch removes the audio_rx_path_id check, so the logic more closely
+    matches what we had before, and now BT is fine again.
+
+commit 95e922846e208678d8e568dfa8f97617a5055710
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 13:00:40 2012 +0100
+
+    Switched to venc driver code from .35 desire qdsp6
+
+commit 5ad4d87eba096832fa519037059df259e4edf848
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 12:54:56 2012 +0100
+
+    Add kineto gan module +  missing files
+
+commit 0cda7b22968081ef31a7c0b85c57331bf15d79e2
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 12:51:17 2012 +0100
+
+    Ported new aac code from Code Aurora (marc1706)
+
+commit 6225737fe8b18df4a770596354cfab3fe8bfd073
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Jan 15 01:18:17 2012 +0100
+
+    Fix for RNDIS and native usb tethering
     Specialize HTCLEO build for Cortex A8
 
-commit 080f17fe3dc2af9397d5c28361b541333412dd92
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 12 20:50:14 2012 -0800
+commit 83d0984ac7a5b9ef675e44fd07ef3537bb9a5bc4
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Fri Jan 13 11:02:19 2012 +0100
 
-    LOL
+    Add Wifi MAC changes from tytung's kernel
 
-commit 88b294a43d1f49018df27dd79b459608811c135e
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Thu Jan 12 20:47:53 2012 -0800
+commit 0a0eb945175c95d6a06136caf6b3d35c2dc62d82
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Fri Jan 13 10:25:07 2012 +0100
 
-    Introduced the custom ACA undervolt!
+    bcm4329: expose firmware_path to userland, backported from bcmdhd
 
-commit b99cb6b0beffbbed952682668ed4f3914c37aaf3
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 23:57:22 2012 -0800
+commit 78bff13dee5e5a5012f3c03c05a0277f846a67f1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:18:14 2012 +0100
 
-    Changed kernel build name.
+    revert Switch to bcm4329_204
 
-commit f840808f4162a49a7f064e4fd0dc5f7405c08b6f
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 23:49:07 2012 -0800
+commit a2b83316a5beeba4972e32d1d2ecf85c37209383
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:06:59 2012 +0100
+
+    wait Add wait_io_event_interruptible and friends
+
+commit cec8772e8a3c7a10e4fed4ae2d58c65221e2f5c3
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:05:08 2012 +0100
+
+    ARM: Stop irqsoff trace on return to user
+
+commit d472031c70a354dcf57d00c6c67f64bd22a242d4
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:02:30 2012 +0100
+
+    mm: Tweak Pagewriteback
+
+commit 0160015a7bbabd519eda58864db3ef89c0bb9ac7
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 20:00:25 2012 +0100
+
+    Fixed: ext4 disk write performance regression
+
+commit 88da2f9bfe8b3103eeda676316c41f516fbabe26
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 19:56:43 2012 +0100
+
+    init/calibrate.c backport from 3.0
+
+commit 6667d39eef21c98458e3edb22e179665499cc420
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 19:54:13 2012 +0100
+
+    ext4: add cleancache support
+
+commit 5988677cd8f005efdc364ded6f5df76c8f1c4bde
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Jan 12 11:13:43 2012 +0100
+
+    Added QTAGUID, changes for ICS compatibility, netfilters and probably a lot more
+    Added missing files from previous commits
+
+commit 42a28dca6e9f45cb2cf0951ddf10560c358b4018
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 22:18:10 2012 +0100
+
+    fix warning: msm_clock_get_nth defined but not used
+
+commit 275952fa5436d4f88a9a7df491aa6c00b1a4c154
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 22:06:24 2012 +0100
+
+    net: Reorder incoming packets in PPPoLAC and PPPoPNS.
+    
+    PPP handles packet loss but does not work with out of order packets.
+    This change performs reordering of incoming data packets within a
+    sliding window of one second. Since sequence number is optional,
+    receiving a packet without it will drop all queued packets.
+    
+    Currently the logic is triggered by incoming packets, so queued
+    packets have to wait till another packet is arrived. It is done for
+    simplicity since no additional locks or threads are required. For
+    reliable protocols, a retransmission will kick it. For unreliable
+    protocols, queued packets just seem like packet loss. Time-critical
+    protocols might be broken, but they never work with queueing anyway.
+
+commit 501be8bd3c084797e60ea54ea6b2b3be0d023983
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 22:02:02 2012 +0100
+
+    sched: Fix the irqtime code for 32bit
+    
+    Since the irqtime accounting is using non-atomic u64 and can be read
+    from remote cpus (writes are strictly cpu local, reads are not) we
+    have to deal with observing partial updates.
+    
+    When we do observe partial updates the clock movement (in particular,
+    ->clock_task movement) will go funny (in either direction), a
+    subsequent clock update (observing the full update) will make it go
+    funny in the oposite direction.
+    
+    Since we rely on these clocks to be strictly monotonic we cannot
+    suffer backwards motion. One possible solution would be to simply
+    ignore all backwards deltas, but that will lead to accounting
+    artefacts, most notable: clock_task + irq_time != clock, this
+    inaccuracy would end up in user visible stats.
+    
+    Therefore serialize the reads using a seqcount.
+
+commit 5a56b76be2806313c1005ec82132e9c933c0b7b7
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:53:01 2012 +0100
+
+    sched: Fix the irqtime code to deal with u64 wraps
+    
+    Some ARM systems have a short sched_clock() [ which needs to be fixed
+    too ], but this exposed a bug in the irq_time code as well, it doesn't
+    deal with wraps at all.
+    
+    Fix the irq_time code to deal with u64 wraps by re-writing the code to
+    only use delta increments, which avoids the whole issue.
+
+commit 1c58bfd9bc66bd1a6c097fb71e160d27f0473581
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:37:45 2012 +0100
+
+    Sched: fix skip_clock_update optimization
+
+commit 4fef2a6024726c341249df83c821e1023c7c0b45
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:28:58 2012 +0100
+
+    Fix audio levels
+
+commit ade1f7047af5c5cfa200cc05d0d5055827d55f62
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:25:53 2012 +0100
+
+    adjust audio gain
+
+commit 6f7e10cf95f551af775ea47a0ee534f00c0b1d8d
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 21:23:45 2012 +0100
+
+    some fixes
+
+commit ba40b73be87f969e089dc7d17758b25f854d715a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 20:48:36 2012 +0100
+
+    tried to fix usb tethering (note: rndis and adb will not work together on windows)
+
+commit e0be97d9cff6a2a85f3b92f64725ec7e9556eb00
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 20:37:20 2012 +0100
+
+    -Enabled call recording and fixed compile errors (thanks to marc)
+    -Add Wifi MAC changes from tytung's kernel
+
+commit 471256903a711b63910a20fb03f64f2fd10162e9
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:52:42 2012 +0100
 
     Reverted eMMC, bma150 mutex, and base power change.
 
-commit c2f2a23873d19f5ab6bf0677a174173ce5d26d79
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 17:57:14 2012 -0800
+commit 394cb7e6aa0eb6f6aecc63571029af8eceba90d4
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:42:43 2012 +0100
 
-    AutoGroup:  Duh moment.
+    AutoGroup fix
 
-commit 5486c07d86c1da7b323da0df8c3a35bdfe34d720
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 14:57:49 2012 -0800
+commit 76b9f22731749274d9c4b51ee99877697430cb53
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:39:19 2012 +0100
 
     Added AutoGroup to the defconfig
 
-commit 80ceaa1756406507afd35d6114a79fc7ea8ce434
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 14:55:14 2012 -0800
+commit 393c89f998c639940cbdd90a4ae15e3c75ea2f4f
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:37:09 2012 +0100
 
     Revert "Replace PPP BKL with mutex"
-    
-    This reverts commit 1d74a9fedd341c65b56e4a4ef18b72ff499294b4.
 
-commit 14394f15396585ab938ffa9774c82da412190293
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 14:52:26 2012 -0800
+commit 670ee4eecf2c216a9ae75254627f9c87a3e4e80c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:35:22 2012 +0100
 
     Patched Autogroup up
 
-commit b5d62d8abf5fa6b7443b3e07f0d06de0843ba2bc
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 14:18:11 2012 -0800
+commit 025ace8679329953eae88a0441677198a78e1180
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:29:26 2012 +0100
 
     sched: Add 'autogroup' scheduling feature
     
     Originally by Mike Galbraith
 
-commit 3b35e54fae05412f3713c0c6e9d20d7677ac41aa
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 12:09:43 2012 -0800
+commit 08ccaf5b5268c7848d8173449265b587c3164305
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:14:35 2012 +0100
 
-    ARM:  Optimize swahb32() byteswap helper for v6 and above
+    ARM: Optimize swahb32() byteswap helper for v6 and above
 
-commit fbbbd57922d200517810bbe8b03e5e9a9fd64c01
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 12:03:45 2012 -0800
+commit e15aa94c4fca2e1409d2e73ca47b42e7fb1f3acc
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:03:30 2012 +0100
 
     Mutex the lock/unlock of BMA150
 
-commit c7e384d9e1668f45814171c73f173b5e1a327c58
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 11:53:35 2012 -0800
+commit 4e7231bc15124912f9d0fde9f785062cc3fa4330
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 15:01:05 2012 +0100
 
-    Bluetooth:  Fix crash with quirky BT dongles with sound
+    Bluetooth: Fix crash with quirky BT dongles with sound
 
-commit 1d74a9fedd341c65b56e4a4ef18b72ff499294b4
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 11:48:51 2012 -0800
+commit 17c708d2dfa11d3c9ea62bf3e65d445ef0569073
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:59:04 2012 +0100
+
+    fix:PM: Wait for completion of the parent resume before resuming.
+
+commit 326d5490b4ec4ae3fa3f15c46cc7b2a7f766242e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:56:06 2012 +0100
 
     Replace PPP BKL with mutex
 
-commit f4045d24cb536afa5b1c109a0bc6b0d02d86c59a
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 11:39:11 2012 -0800
+commit 53e5b6c9eb6dd6fe5ae6db2deab968152d891e4f
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:54:38 2012 +0100
 
     Put eMMC in sleep (cmd5) mode before suspend.
 
-commit af58eb663f517178f8fc42393c099f64cf1a4bc3
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 9 11:30:56 2012 -0800
+commit 86fe6c5732de846dac6c710f560561988e641a35
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:47:14 2012 +0100
 
-    PM:  Wait for completion of the parent resume before resuming.
+    PM: Wait for completion of the parent resume before resuming.
 
-commit 74ab8abd0efc06f51802fd4c5a0130092896364d
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Mon Jan 2 00:02:21 2012 -0800
+commit 3e7d9764ac60081cd9d2cc396e065ce499b56104
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:41:07 2012 +0100
 
-    Disabled the V4L2 interface for Camera.
+    lowered wifi to connect a low signal -108 (bananacakes)
 
-commit 09b354ff5272a1e06fa1db1b5794b802d113a2b9
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 23:53:20 2012 -0800
+commit ec0d7308b171db06623e5e52eec0b5b84b2dbf07
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:39:27 2012 +0100
 
-    Tweaked CPU setup
+    WIFI PM=FAST in standby (bananacakes)
 
-commit 6a2893197a70c202d7e1e64679e1eb4ece34dd71
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 23:34:07 2012 -0800
+commit d1f316179aced79b0b7edfa3f7888e51c4fb9a4a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:34:54 2012 +0100
 
-    Fixed Call Recording
-
-commit 481f8d15be9023a120b4e4f16e4182568678a922
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 23:27:49 2012 -0800
-
-    Slight change to WinCE clock structure as per Fikret
-
-commit a319a22100cc62f23c8cbc0e815329c1a78b7fbd
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 23:25:51 2012 -0800
-
-    Applied one Jan-Willem3 tweak
-
-commit 982d54a110cc54d6223036e415e8107895389bd9
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 23:20:35 2012 -0800
-
-    Tweaked Camera as per bananacakes and marc1706
-
-commit abb05a831486473ddac050cfbdbaa4436bda5016
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 23:17:00 2012 -0800
-
-    htcleo: audio: add proc file interface /proc/mic_level and fix mic ga…
+    msm: Add sysfs interface for mfreq
     
-    …in (Credits to mdebeljuh and jdivic)
+    Add mfreq interface in sysfs.  This forces the system to use the
+    maximum CPU clock on all CPU cores.
+    (mfreq=1 enables, mfreq=0 disables)
+
+commit 2de609c9259872e13a2e3583dd069771169f711e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:28:33 2012 +0100
+
+    INIT_COMPLETION should be used for repeated reset of completion
     
-    Apply the diff file from http://forum.xda-developers.com/showpost.php?p=17031938&postcount=97
-    Disable debug output and fix typo by tytung.
+    object after init_completion has been done once. init_completion
+    reinitalizes the head of the list which could be bad if there are
+    completion objects already waiting.
+
+commit 0fa5b1607f15b59fc6895e92779f6cbdae9c46b5
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 14:26:22 2012 +0100
+
+    msm: cpufreq: Do not call a cpu transition if selecting the same speed.
+
+commit 9aa605b2422755bcf0f72840bee262246371a115
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:59:04 2012 +0100
+
+    msm: rpc: free the buffer if read fails.
     
-    Usage: echo 'device_id level' > /proc/mic_level
-    Level range: 0-1000; -1 use level from acdb
-    Current levels (device_id):
-    HANDSET (0): -1
-    SPKR_PHONE (1): -1
-    HEADSET (2): -1
-    TTY_HEADSET (3): -1
-    BT_SCO (4): -1
+    In do_read_data(), while reading a data fragment, if
+    read() fails to read all the required bytes, free the fragment
+    buffer.  Also correct the allocation size for fragment buffer.
 
-commit e1d8c799f47a4902b67160ed5c469ff0eaab8fb5
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 23:07:37 2012 -0800
+commit 64cb26a2260721138dda3851cb85acc6609d7b5b
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:56:29 2012 +0100
 
-    Fixed unique BT mac address
+    Update msm_q6venc.h to .38 version from codeaurora
 
-commit 541ec2040d48acdfada380bc3bb2b1b539cdb7fd
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 22:57:59 2012 -0800
+commit 9dee7aa2183f24a7b6bef1296b7cfa7cca774b34
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:54:52 2012 +0100
 
-    Tweaked smartassV2 for Snapdragon
+    fix previous commit
 
-commit 32e483c99c57ef194c45a37a4dc8fbfe3c2336f6
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 22:56:17 2012 -0800
+commit ce563edc46e4525b0ac1cd34cefd4871708d8e25
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:52:22 2012 +0100
 
-    Extended extended battery support as-per Marc1706
+    Backport qdsp6 venc driver from .38 kernel
 
-commit c2de3d3165e7a87e71211c2d2f22aecfa5b3c34a
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 22:52:07 2012 -0800
+commit a35915352e5464c956d5694872cf446edf71e108
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:49:04 2012 +0100
 
-    Merged headset driver from .35 cm-kernel -- HS is now working
-    thx to Marc1706
+    Switch to bcm4329_204 in order to have working wireless hotspot
 
-commit 14fbf90a7f2a1bcd984e69e6db0fe4beb8d1472a
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 22:47:47 2012 -0800
+commit 6c6f346954b9cef4e763550ef8a13fe358b1abdb
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:32:55 2012 +0100
 
-    Lowered Wifi Voltage
+    ARM: Move leds idle start/stop calls to idle notifiers
+    ARM: idle: update idle ticks before call idle end notifier (Such that interactive cpufreq governor uses up-to-date idle time
+    information.)
+    ARM: idle: call idle notifiers before stopping nohz tick (If an idle notifier modifies a timer, calling the notifier after
+    the sched tick has been stopped may leave the sched tick set too early.  Move teh idle notifier call before the call to
+    tick_nohz_stop_sched_tick.)
 
-commit 93bb5e493de77a5477ecbb75ad47c0c71af4f58d
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 22:36:39 2012 -0800
+commit 1612f3d9f21889dcb79afcb55a1e6647a0f52215
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:29:08 2012 +0100
 
-    Added Max_Control_Command_Size
+    ARM: Call idle notifiers
 
-commit 1c0fcce7186d81f855a5e1e66ca73cd0958588c9
-Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
-Date:   Sun Jan 1 22:33:51 2012 -0800
+commit 6b0e7ded2892c6042ffd1608249ff31196457242
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:27:56 2012 +0100
 
-    Tweaked Battery.  Set PM_FAST on wifi
+    Move x86_64 idle notifiers to generic
+
+commit 058d85cad10387e674651af221a5e6f64253a91a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:23:59 2012 +0100
+
+    cpufreq: use system_wq instead of dedicated workqueues (With cmwq, there's no reason for cpufreq drivers to use separate
+    workqueues.  Remove the dedicated workqueues from cpufreq_conservative and cpufreq_ondemand and use system_wq instead.  The work items are
+    already sync canceled on stop, so it's already guaranteed that no work is running on module exit.)
+    [CPUFREQ] calculate delay after dbs_check_cpu (calculate ondemand delay after dbs_check_cpu call because it can
+    modify rate_mult value, use freq_lo_jiffies value for the sub sample period of powersave_bias mode)
+    [CPUFREQ] Remove deprecated sysfs file sampling_rate_max
+    [CPUFREQ] Remove old, deprecated per cpu ondemand/conservative sysfs files
+    [CPUFREQ] Remove unneeded locks (There cannot be any concurrent access to these through
+    different cpu sysfs files anymore, because these tunables are now all global (not per cpu).)
+
+commit 2c93bd9081cd752646b7f33c7c00bc966b770869
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:19:38 2012 +0100
+
+    sched: refactor task_group() (move cgroup-related task group finding to cgroup_task_group().
+    No function change.)
+    sched: Don't call task_group() too many times in set_task_rq() (It improves perfomance, especially if autogroup is enabled.
+    The size of set_task_rq() was 0x180 and now it is 0xa0.)
+
+commit fb2a0cee0afc14157c9793864a1e6a43884047bd
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:15:04 2012 +0100
+
+    sched, autogroup
+
+commit c0b5db42ecd9ef79715c6040740cfcae5cf40d8e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:09:32 2012 +0100
+
+    Reduce min voltage to 925mV
+
+commit f1163e776d05f910f99a6284a08e274ef8b50eb8
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:07:55 2012 +0100
+
+    Update compile script and fix typo
+
+commit 958f0829ff0a76b3e1ad3c900f10a9e5464282ba
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:05:42 2012 +0100
+
+    Backported vzalloc to better support zram (faux123)
+
+commit 64f6736bfda1219fd84ce70a87b4281da3c86702
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 12:02:32 2012 +0100
+
+    Compile zram as module
+    
+    zram needs to be a module in order to be able to work
+
+commit 3d0376888a286cee3bf16e038772c261f0051a90
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:59:25 2012 +0100
+
+    implemented support for CyanogenMod Performance settings to change the max CPU and min CPU frequency
+
+commit 03743fba4e5ee529bcd860e6031670ed00995cd1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:49:12 2012 +0100
+
+    missing genlock header file
+
+commit 655b7e6ce4956d770981d710f75a834816a559dd
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:40:26 2012 +0100
+
+    Update to lulzactive V2 Thanks to tegrak.
+    Thanks to gokhanmoral for this updated version of Tegrak's lulzactive governor that fixes the "permanent sleep when screen is off" bug with my update3 based sources.
+
+commit d273d6c1328d593780fdc823c55e0f133b9d844a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:28:45 2012 +0100
+
+    port genlock from ca msm-3.0
+
+commit 60f91c1a6bbd3687b35fdca5d1227669503ffb68
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:21:24 2012 +0100
+
+    backported kgsl drivers from msm-3.0
+
+commit a84dc7a2f109856e6a5220af88fbf7d40e413386
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:18:29 2012 +0100
+
+    Fixed hardcoded setting of REG_PLL_MULTIPLIER_LSB (This is set to 65.5 MHz in the HTC version of s5k3e2fx.c while
+    the up-to-date codeaurora file sets this to REG_PLL_MULTIPLIER_LSB_VALUE (83 MHz))
+
+commit 3f6ee146b25a38e0c67fe3bce224ef00f1e2d3d3
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:16:03 2012 +0100
+
+    Removed obsolete code for msm_clocks(Switched to .35 desire msm_clocks[])
+    Fixed remaining issues after getting rid of obsolete msm_clocks
+
+commit 7d846008eb38dd1b6897c4093d78a5da91b2ca9e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Jan 11 11:08:01 2012 +0100
+
+    Modified qdsp6 for htc leo
+
+commit f06c5c8a6e864a4e56a6d4b282097d35bdb36aa8
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 2 11:03:26 2012 +0100
+
+    Added missing files
+
+commit 0cb4cb9f2557f082ccd4fdf3a2cd605ab4196c93
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Jan 2 01:05:17 2012 +0100
+
+    Tweaked BFS (bananacakes)
+    Some more cleanup in htcleo files (marc1706)
+    audio: added Two-way call recording (Credit to avs333)
+    htcleo: audio: add proc file interface /proc/mic_level and fix mic gain (Credits to mdebeljuh and jdivic)
+    Added zram from 2.6.38 kernel and used faux123's files (marc1706)
+    late_initcall has to be right after the function definition (marc1706)
+    Cleanup in AVS files
+    wifi undervolting
+    Updated defconfig to .35 settings (marc1706)
+    Raised HZ to 300 (marc1706)
+    Ext4 Patches from 3.x.x Kernel (Sar Castillo)
+    Minor cleanup of some typo errors in suspend.c code
+    Kernel changed to GZIP compression
+    Small tweak for ondemand governor
+    Added Ezekeel's lazy governor with all default parameters.
+    Update to lulzactive V2 Thanks to tegrak.
+    changed default governor to ONDEMAND
+    implemented support for CyanogenMod Performance settings to change the max CPU and min CPU frequency
+
+commit c89f9996df5d3bd40b4bf7a82ed9bb4d55f062be
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Dec 28 11:27:31 2011 +0100
+
+    wince structure fix, small other fixes
+
+commit 3a476fb6bd2e0908de7c2d1b7e24b9ea253d9d1c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Tue Dec 27 04:56:33 2011 +0100
+
+    Some cleanups from marc
+    fix scaling_cur_freq bananacakes
+    Another nikantonelli fix
+    Jhash3 (by jan-willem3)
+
+commit 3149dff8a41ebe79ec28a36f67418fba399888a8
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Tue Dec 27 00:14:46 2011 +0100
+
+    Some tweaks suggested by jan-willem3
+
+commit 72214a364c2e621416db9fe123ac39a8e775bc33
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Dec 26 22:49:13 2011 +0100
+
+    Use a realtime priority thread for AVS. Tweaked AVS code, Tweak camera -- bananacakes, Raise VOLTAGE_MIN_START of AVS to 950
+
+commit 4651dfb6fbc7596a57d55400fc29d75d8a54cae6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Dec 26 19:22:22 2011 +0100
+
+    Added max_control_command_size for data in camera, added missing AVS initialization & regulator changes, and fixed ondemandx governor (Thanks to Marc1706)
+
+commit 57f634c4fc3491f099297143549a3905e6556264
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sat Dec 24 00:40:55 2011 +0100
+
+    Small tweak
+
+commit 94e54f9d5ad12c3ae9ef1114c6c5175d46e90515
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sat Dec 24 00:11:55 2011 +0100
+
+    Make Superbad default governor
+
+commit c5e9b8ecb1c2af51ef5b522833b0d9dc37d53693
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sat Dec 24 00:08:03 2011 +0100
+
+    Version fix
+
+commit 1c095a8aa70389962feb5db7860f9f86e07fec4a
+Merge: 04106b3 21bf873
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Fri Dec 23 23:57:34 2011 +0100
+
+    Merge branch 'nonsense' of https://github.com/fhasovic/desire_kernel_35 into nonsense
+    
+    Conflicts:
+    	arch/arm/configs/htcleo_defconfig
+
+commit 04106b35de51922e0939ee0fc2093dc0cce92bc1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Fri Dec 23 23:55:32 2011 +0100
+
+    Updated version
+
+commit 21bf87352ea30628088f818d36552827c9b82439
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Fri Dec 23 23:30:29 2011 +0100
+
+    Added governors and schedulers, added and tweaked AVS, tweaked bluetooth and fixed powerdrain in standby.
 
 commit 00d9c60976a321c3c5b9ec9b031c6ba23c8166f4
 Author: warrenb213 <AmeriCanAndroidROM@gmail.com>
