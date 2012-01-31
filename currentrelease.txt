@@ -1,3 +1,17 @@
+commit f801bc1b634a60495d09bee2ea2e5004d4c2b264
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Tue Jan 31 15:21:41 2012 +0100
+
+    Disabled hacks in mdp files of video driver
+
+commit 092f0ac81a205bda31a3f23d487946328e88cba1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Tue Jan 31 15:16:37 2012 +0100
+
+    mm-video:8k:vdec: fixing a potential memory corruption.
+    ARM: msm: qdsp6: convert audio ioctl to unlocked_ioctl
+    Added missing pmem settings
+
 commit ee948e4c11e7e02745db8170d61839d5ee88e1b0
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Mon Jan 30 10:36:42 2012 +0100
