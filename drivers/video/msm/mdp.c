@@ -128,7 +128,7 @@ static irqreturn_t mdp_isr(int irq, void *data)
 	status = mdp_readl(mdp, MDP_INTR_STATUS);
 	mdp_writel(mdp, status, MDP_INTR_CLEAR);
 
-#if defined(CONFIG_MACH_HTCLEO)
+#if 0 && defined(CONFIG_MACH_HTCLEO)
 	status &= ~0x10000; // Cotulla
 #endif
 
