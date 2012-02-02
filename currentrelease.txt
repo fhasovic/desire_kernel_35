@@ -1,3 +1,64 @@
+commit d2fd419a1689f41cb4bd077187e48af53000635c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:38:51 2012 +0100
+
+    drivers: mmc: msm: Change max frequency to 49152000 (ACA)
+
+commit e96133dea774da154b60649515a394e5e859b19e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:36:56 2012 +0100
+
+    Updated EarlySuspend and WakeLock (ACA)
+
+commit 6b2bfce44771dec68e80af962f81950f611551dd
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:32:49 2012 +0100
+
+    Updated the built-in wakelock (ACA)
+
+commit ae0841a3754e97bb29cb590aa30f34e633d05f20
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:30:54 2012 +0100
+
+    Reverted Q6 change (ACA)
+
+commit 79f3aff50794f36b594eb6613c26f9f05856ae30
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:28:05 2012 +0100
+
+    Various changes
+    including regulator: tps65023: clear the client data in i2c (from 2.6.34) (ACA)
+
+commit 64eb65fa638cc7ebc3e7fcfe58be8d09831ec254
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:17:01 2012 +0100
+
+    Disabled Packet Filtering (ACA)
+
+commit fcfd1610876c72ea607ef44ef42a9c08965af3bb
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:13:05 2012 +0100
+
+    Slight mod to CPU table. 1E is classically the peak value (ACA)
+
+commit c69ff6eeeeb14376ad9e326646f0cebbd9282ca2
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:05:16 2012 +0100
+
+    ARM: msm: qdsp6: convert audio ioctl to unlocked_ioctl (ACA)
+
+commit bdc7e4521f3cbcb580c0ad5b2eb92b0177cfdd03
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 10:58:53 2012 +0100
+
+    RMNET is module now. Lets get data arrows working.
+
+commit 942f6bc30057bb8de245b68ecff9f56dff9a2360
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 10:57:51 2012 +0100
+
+    reverted (fix compile)
+
 commit e73c60f3dd1b956f1d23a864a5b699985dc80394
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Thu Feb 2 10:54:51 2012 +0100
