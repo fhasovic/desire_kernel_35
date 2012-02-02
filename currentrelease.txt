@@ -1,3 +1,15 @@
+commit e73c60f3dd1b956f1d23a864a5b699985dc80394
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 10:54:51 2012 +0100
+
+    Set built-in flag for wifi (ACA)
+
+commit 7432d75b27642abb190b59816de35bf12b2d8091
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 10:51:19 2012 +0100
+
+    Disabled a few of the new defconfigs related to video (ACA)
+
 commit 423edd696e495a080844bc9f3fb7d3d34947fc75
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Tue Jan 31 15:48:31 2012 +0100
