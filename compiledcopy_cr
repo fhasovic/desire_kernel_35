@@ -1,0 +1,18 @@
+#cleanup
+if [ -e ../compiled_cr ];
+then
+	rm -r ../compiled_cr;
+fi;
+
+#packageprep
+if [ ! -e ../compiled_cr ];
+then
+	mkdir ../compiled_cr;
+	mkdir ../compiled_cr/modules;
+fi;
+
+#packaging
+cp ./currentrelease.txt ../compiled_cr/currentrelease.txt
+cp ./arch/arm/boot/zImage ../compiled_cr/zImage
+find ./ -type f -name "*.ko" -exec cp {} ../compiled_cr/modules/ \;
+
