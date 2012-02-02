@@ -1,3 +1,9 @@
+commit 423edd696e495a080844bc9f3fb7d3d34947fc75
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Tue Jan 31 15:48:31 2012 +0100
+
+    block: cgroups, kconfig, build bits for BFQ-v3r1-2.6.38
+
 commit f801bc1b634a60495d09bee2ea2e5004d4c2b264
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Tue Jan 31 15:21:41 2012 +0100
