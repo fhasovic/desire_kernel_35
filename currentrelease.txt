@@ -1,3 +1,30 @@
+commit 5cc70b1d03bfead9556e980521d9110f434bed88
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:59:29 2012 +0100
+
+    Removed useless rc from q6audio_set_tx_mute()
+
+commit 79290f3be97c26b326100b3ff3fbc4ff566bd1c1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:54:40 2012 +0100
+
+    Added mac partition to parition table (thx munjeni)
+
+commit 3481391a584fcbe0b32fd77d892cb4e2e7cf3a0a
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:51:22 2012 +0100
+
+    [ARM] msm8k: fixes for audio_ctl and pcm_out
+    
+    -- q6_ioctl was not doing proper checks on user data
+    -- pcm_ioctl would crash if AUDIO_SET_VOLUME got called before AUDIO_START
+
+commit 9bd7b66ab46115f2b28281fda614101cdae07f52
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:49:58 2012 +0100
+
+    rmnet compiling as a module (big thanks to ACA)
+
 commit e2dced380fe2c95fd3fa2226ae79fe2d2c3af377
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Feb 8 13:27:05 2012 +0100
