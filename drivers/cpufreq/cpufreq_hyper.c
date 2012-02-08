@@ -37,9 +37,6 @@
  * It helps to keep variable names smaller, simpler
  */
 
-static DEFINE_PER_CPU(unsigned int, idle_start);
-static DEFINE_PER_CPU(unsigned int, idle_end);
-
 #define DEF_FREQUENCY_DOWN_DIFFERENTIAL		(10)
 #define DEF_FREQUENCY_UP_THRESHOLD		(65)
 #define MICRO_FREQUENCY_DOWN_DIFFERENTIAL	(3)
@@ -62,6 +59,28 @@ static DEFINE_PER_CPU(unsigned int, idle_end);
 #define MIN_SAMPLING_RATE_RATIO			(2)
 
 static unsigned int min_sampling_rate;
+
+static DEFINE_PER_CPU(unsigned int, idle_start);
+static DEFINE_PER_CPU(unsigned int, idle_end);
+
+static int idle_event_handler(struct notifier_block *n,
+	unsigned long cmd, void *p)
+{
+	switch (cmd) {
+	case IDLE_START:
+		percpu_write(idle_start, jiffies);
+		break;
+	case IDLE_END:
+		percpu_write(idle_end, jiffies);
+		break;
+	}
+
+	return NOTIFY_DONE;
+}
+
+static struct notifier_block idle_notifier_block = {
+	.notifier_call  = idle_event_handler,
+};
 
 #define LATENCY_MULTIPLIER			(250)
 #define MIN_LATENCY_MULTIPLIER			(100)
@@ -131,9 +150,44 @@ static struct dbs_tuners {
 	.down_differential = DEF_FREQUENCY_DOWN_DIFFERENTIAL,
 	.ignore_nice = 0,
 	.powersave_bias = 0,
-	.deep_sleep = 0,
-	.fast_start = 0,
+	.deep_sleep = 1,
+	.fast_start = 1,
 	.suspend_freq = DEF_SUSPEND_FREQ,
+};
+
+static unsigned int dbs_enable=0;	/* number of CPUs using this policy */
+
+// hyper suspend mods (Thanks to Imoseyon)
+static unsigned int suspended = 0;
+static void hyper_suspend(int suspend)
+{
+        struct cpu_dbs_info_s *dbs_info = &per_cpu(od_cpu_dbs_info, smp_processor_id());
+        if (dbs_enable==0) return;
+        if (!suspend) { // resume at max speed:
+                suspended = 0;
+                __cpufreq_driver_target(dbs_info->cur_policy, dbs_info->cur_policy->max,
+			CPUFREQ_RELATION_L);
+                pr_info("[hyper] hyper awake at %d\n", dbs_info->cur_policy->cur);
+        } else {
+                suspended = 1;
+		// let's give it a little breathing room
+                __cpufreq_driver_target(dbs_info->cur_policy, dbs_tuners_ins.suspend_freq, CPUFREQ_RELATION_H);
+                pr_info("[hyper] hyper suspended at %d\n", dbs_info->cur_policy->cur);
+        }
+}
+
+static void hyper_early_suspend(struct early_suspend *handler) {
+       hyper_suspend(1);
+}
+
+static void hyper_late_resume(struct early_suspend *handler) {
+       hyper_suspend(0);
+}
+
+static struct early_suspend hyper_power_suspend = {
+        .suspend = hyper_early_suspend,
+        .resume = hyper_late_resume,
+        .level = EARLY_SUSPEND_LEVEL_DISABLE_FB + 1,
 };
 
 static inline cputime64_t get_cpu_idle_time_jiffy(unsigned int cpu,
@@ -653,7 +707,7 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
 		}
 
 		/*
-		 * For the purpose of ondemand, waiting for disk IO is an
+		 * For the purpose of hyper, waiting for disk IO is an
 		 * indication that you're performance critical, and not that
 		 * the system is actually idle. So subtract the iowait time
 		 * from the cpu idle time.
@@ -766,8 +820,10 @@ static void do_dbs_timer(struct work_struct *work)
 			delay = dbs_info->freq_hi_jiffies;
 		}
 	} else {
+		if (!suspended)
 		__cpufreq_driver_target(dbs_info->cur_policy,
 			dbs_info->freq_lo, CPUFREQ_RELATION_H);
+	    delay = dbs_info->freq_lo_jiffies;
 	}
 	queue_delayed_work_on(cpu, khyper_wq, &dbs_info->work, delay);
 	mutex_unlock(&dbs_info->timer_mutex);
@@ -882,6 +938,8 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 
 		mutex_init(&this_dbs_info->timer_mutex);
 		dbs_timer_init(this_dbs_info);
+		register_early_suspend(&hyper_power_suspend);
+		pr_info("[hyper] hyper active\n");
 		break;
 
 	case CPUFREQ_GOV_STOP:
@@ -895,7 +953,8 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 		if (!dbs_enable)
 			sysfs_remove_group(cpufreq_global_kobject,
 					   &dbs_attr_group);
-
+		unregister_early_suspend(&hyper_power_suspend);
+		pr_info("[hyper] hyper inactive\n");
 		break;
 
 	case CPUFREQ_GOV_LIMITS:
@@ -938,7 +997,7 @@ static int __init cpufreq_gov_dbs_init(void)
 			MIN_SAMPLING_RATE_RATIO * jiffies_to_usecs(8);
 	}
 
-	khyper_wq = create_workqueue("khyper");
+	khyper_wq = create_rt_workqueue("khyper");
 	if (!khyper_wq) {
 		printk(KERN_ERR "Creation of khyper failed\n");
 		return -EFAULT;
@@ -960,7 +1019,7 @@ static void __exit cpufreq_gov_dbs_exit(void)
 
 MODULE_AUTHOR("Venkatesh Pallipadi <venkatesh.pallipadi@intel.com>");
 MODULE_AUTHOR("Alexey Starikovskiy <alexey.y.starikovskiy@intel.com>");
-MODULE_DESCRIPTION("'cpufreq_hyper' - A dynamic cpufreq governor for "
+MODULE_DESCRIPTION("'cpufreq_hyper' - A dynamic cpufreq governor with a sleep profile based on ondemand for "
 	"Low Latency Frequency Transition capable processors");
 MODULE_LICENSE("GPL");
 

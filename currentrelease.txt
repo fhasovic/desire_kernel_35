@@ -1,3 +1,27 @@
+commit cb02ea37b85be429314c380188498f8624a8b6db
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:59:13 2012 +0100
+
+    Just a little tweak to put this in-line with 35 and version increase
+
+commit 70ac41cec375ba03b3030a2194f8719ca497ffe6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:55:31 2012 +0100
+
+    Introduced SLQB Allocator (ACA)
+
+commit 3904bff1a7145f7bc5bb9551722dd13191a0be99
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:50:11 2012 +0100
+
+    Modded defconfig for new SLQB
+
+commit ab1b53d13a7c357c909847ab1ee9b972919db3f7
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Thu Feb 2 11:47:45 2012 +0100
+
+    Add SLQB Allocator (ACA)
+
 commit d2fd419a1689f41cb4bd077187e48af53000635c
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Thu Feb 2 11:38:51 2012 +0100

@@ -270,3 +270,4 @@ void request_suspend_state(suspend_state_t state);
 suspend_state_t get_suspend_state(void);
 #endif
 
+

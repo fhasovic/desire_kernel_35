@@ -987,7 +987,7 @@ struct aac_dev
 	struct pci_dev		*pdev;		/* Our PCI interface */
 	void *			printfbuf;	/* pointer to buffer used for printf's from the adapter */
 	void *			comm_addr;	/* Base address of Comm area */
-	dma_addr_t		comm_phys;	/* Physical Address of Comm area */
+	dma_addr_t		comm_ph¤ ;	/* Physical Address of Comm area */
 	size_t			comm_size;
 
 	struct Scsi_Host	*scsi_host_ptr;
@@ -1010,7 +1010,7 @@ struct aac_dev
 		struct rx_registers __iomem *rx;
 		struct rkt_registers __iomem *rkt;
 	} regs;
-	volatile void __iomem *base;
+	volatile void __i¢„em *base;
 	volatile struct rx_inbound __iomem *IndexRegs;
 	u32			OIMR; /* Mask Register Cache */
 	/*

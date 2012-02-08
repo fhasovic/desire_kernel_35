@@ -684,3 +684,4 @@ static void  __exit wakelocks_exit(void)
 
 core_initcall(wakelocks_init);
 module_exit(wakelocks_exit);
+

@@ -390,7 +390,7 @@ SYSI2:
         mrc p15, 0, r2, c15, c15, 2
         orr r2, r2, #0x10
         mcr p15, 0, r2, c15, c15, 2
-#endif
+#endif 
 
         //; Make sure Link stack is initialized with branch and links to sequential addresses
         //; This aids in creating a predictable startup environment
