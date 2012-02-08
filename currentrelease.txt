@@ -1,3 +1,44 @@
+commit e2dced380fe2c95fd3fa2226ae79fe2d2c3af377
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:27:05 2012 +0100
+
+    missing memcopy files
+
+commit 54a6d761abfc6c43349cb01cea1753a5a531e2b9
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:22:36 2012 +0100
+
+    Improve the performance of memcpy and memmove of the general version (bananacakes)
+
+commit 1c4208e155ccb1586df1072cfa2e2568a15084d6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:19:46 2012 +0100
+
+    Disabled SunRPC (ACA)
+
+commit de8018282efcbd4e08a76b6325243ff4b243e1a1
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:17:32 2012 +0100
+
+    Set CONFIG_MSM7X00A_SLEEP_MODE=1 (marc)
+
+commit fed55af908cfa1d7f13a381a93848fd039096aef
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 13:06:10 2012 +0100
+
+    Fixed headset on ICS (Thanks to zivan56)
+    
+    Made a bunch of mods, disabling what we don't need etc (ACA)
+    Fixed Prox Sensor location permissions to 666. (ACA)
+    May have now allowed knock off chargers to fast charge (ACA)
+    Added suspend mod to hyper (Thanks to Imoseyon)
+    nohz: Fix update_ts_time_stat idle accounting
+    Remove set_need_resched from rcutree.c (Thanks to drod2169)
+    Added Stochastic Fair Blue Net Scheduler (SFB)
+    
+    Added back AVS, fixed OC'ing up-to 1.5GHz.
+    Fixed camcorder feezing
+
 commit cb02ea37b85be429314c380188498f8624a8b6db
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Thu Feb 2 11:59:13 2012 +0100
