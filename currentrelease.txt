@@ -1,3 +1,9 @@
+commit c59456c44e4df7d84840fa97b1fed2a09e9374aa
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 14:28:33 2012 +0100
+
+    Minor edit of hyper governor
+
 commit a22d434ae33e8022b3568c0eddeb2615abde7d2b
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Feb 12 13:44:19 2012 +0100
