@@ -1,3 +1,55 @@
+commit a22d434ae33e8022b3568c0eddeb2615abde7d2b
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 13:44:19 2012 +0100
+
+    ksm: drain pagevecs to lru
+    
+    It was hard to explain the page counts which were causing new LTP tests
+    of KSM to fail: we need to drain the per-cpu pagevecs to LRU occasionally.
+
+commit 093d43094b3d816f858897563267f27dbc2cd13c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 13:39:26 2012 +0100
+
+    ipv4: Save nexthop address of LSRR/SSRR option to IPCB. + FIX
+    
+    https://github.com/mirrors/linux-2.6/commit/ac8a4810
+    
+    FIX:
+    ipv4: Fix wrong order of ip_rt_get_source() and update iph->daddr.
+    https://github.com/mirrors/linux-2.6/commit/5dc7883f2a7c25f8df40d7479687153558cd531b
+
+commit d3288689c6041dd0ed119389bd33054e1d3484a0
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 13:27:51 2012 +0100
+
+    synaptics added CONFIG_TOUCHSCREEN_DUPLICATED_FILTER
+
+commit 7f895ddd4a8b363f3b3dc70faf66339ffd98b95c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 13:25:51 2012 +0100
+
+    rcu: call __rcu_read_unlock() in exit_rcu for tiny RCU
+    
+    Using __rcu_read_lock() in place of rcu_read_lock() leaves any debug
+    state as it really should be, namely with the lock still held.
+
+commit b6998ce125288e11e5284f274eb7393289ec1ea6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 13:23:57 2012 +0100
+
+    rcutorture: add random preemption
+    
+    Add random preemption to help we to torture the preemptable rcu.
+    
+    srcu_read_delay() also calls rcu_read_delay() for shorter delays.
+
+commit d47766ccf14c83514925ab0019be085ea83a5a77
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Wed Feb 8 16:48:30 2012 +0100
+
+    Ported new aac code from Code Aurora
+
 commit 5cc70b1d03bfead9556e980521d9110f434bed88
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Wed Feb 8 13:59:29 2012 +0100

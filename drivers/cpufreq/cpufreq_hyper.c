@@ -6,6 +6,7 @@
  *                      Jun Nakajima <jun.nakajima@intel.com>
  *
  *                 2012 Minor Edits by Sar Castillo <sar.castillo@gmail.com>
+ *                 2012 Minor Edits by Fikret Hasovic <fikret.hasovic@gmail.com>
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
@@ -44,7 +45,7 @@
 #define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(10000)
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
-#define DEF_SUSPEND_FREQ				(500000)
+#define DEF_SUSPEND_FREQ			(499200)
 
 /*
  * The polling frequency of this governor depends on the capability of
