@@ -1,3 +1,10 @@
+commit 8d3047305bb670dfe25452976b8888c08e708d06
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:41:20 2012 +0100
+
+    lib: bitmap/genalloc: backport from cafs 3.0
+    + fix for cache
+
 commit 3c3e1382134829b22b1f5f586113560d5e3c15ed
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Feb 12 23:29:48 2012 +0100
