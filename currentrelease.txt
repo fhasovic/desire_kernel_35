@@ -1,3 +1,27 @@
+commit bacb75a625ca534ba49de1a359fb7ed47a66ad1b
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:23:26 2012 +0100
+
+    mm: ashmem: get/put file and flush/clean/inv range support
+
+commit f32d917498aa312636d13f627e6e983665fcd8a6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:21:13 2012 +0100
+
+    Kbuild: Export ashmem header file to user space
+
+commit 4d704a6c48c1eb5b603fe4f3e0f0a86c416200fb
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:19:11 2012 +0100
+
+    arm: asm: cacheflush: add invalidate/clean range
+
+commit 6cceec1ce6d6be1e36783d44eefc48899373fbe6
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:17:25 2012 +0100
+
+    drivers: base: squashed commit: Updated generic cross-process locking API
+
 commit 7cdecb9b26b8da02e5009bd6eefe94155d739854
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Feb 12 15:44:55 2012 +0100
