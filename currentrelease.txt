@@ -1,3 +1,9 @@
+commit 7cdecb9b26b8da02e5009bd6eefe94155d739854
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 15:44:55 2012 +0100
+
+    tweak for hyper (thanks dorimanx) and re-added lagfree
+
 commit c59456c44e4df7d84840fa97b1fed2a09e9374aa
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Feb 12 14:28:33 2012 +0100
