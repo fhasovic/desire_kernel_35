@@ -1,3 +1,21 @@
+commit 7a92b2be27aef440bb7241e07b3af454cf91577e
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:47:49 2012 +0100
+
+    added missing files
+
+commit 9cbdff508b544a0024c01d4a5ca4859677355dc9
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:46:47 2012 +0100
+
+    arm: defconfig: enable kms support
+
+commit 118d117da3b905153d34147f3e544e59d0fda472
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Sun Feb 12 23:45:17 2012 +0100
+
+    lib: backport memory_alloc from cafs 3.0
+
 commit 8d3047305bb670dfe25452976b8888c08e708d06
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Feb 12 23:41:20 2012 +0100
