@@ -1,3 +1,9 @@
+commit 6b47db1aa74aef281d65887f21461be069023342
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Feb 13 16:22:33 2012 +0100
+
+    revert arm: msm: memory: clean/inv cache support
+
 commit 7a92b2be27aef440bb7241e07b3af454cf91577e
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Sun Feb 12 23:47:49 2012 +0100

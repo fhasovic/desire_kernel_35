@@ -450,7 +450,7 @@ config CPU_FREQ_MIN_TICKS
 
 config LATENCY_MULTIPLIER
         int "Sampling rate multiplier for advanced governors."
-        default 1000
+        default 350
         help
           Sampling latency rate multiplied by the cpu switch latency.
           Affects governor polling.
