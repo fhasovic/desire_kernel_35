@@ -1,3 +1,15 @@
+commit 6353cc2e09a6b6409ee1e1dfc21d6ecf953e368c
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Feb 13 16:59:34 2012 +0100
+
+    reverted lib: bitmap/genalloc: backport from cafs 3.0
+
+commit 1b43efa59f8dfaa25952c2dcf93c30967e7b1556
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Feb 13 16:56:26 2012 +0100
+
+    Tweaked default sampling rate multiplier of hyper cpufreq governor
+
 commit 6b47db1aa74aef281d65887f21461be069023342
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Mon Feb 13 16:22:33 2012 +0100
