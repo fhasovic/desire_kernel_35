@@ -1,3 +1,15 @@
+commit a0623d671cf66568a05d5d322f63abf9d18bdd27
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Feb 13 23:39:04 2012 +0100
+
+    wakelocks: Allow independent debugging of wake_lock_destroy() Some people have battery life issues with a major contributor ofdeleted_wake_locks.  This is impossible to debug without enablingDEBUG_WAKE_LOCK, which spams the dmesg with a lot of info irrelevantto deleted_wake_locks.  This allows an independent debug_mask settingfor wake_lock_destroy()
+
+commit 319faefd390b4e56000cae16a6cce414de72a091
+Author: Fikret Hasovic <fikret@ubuntu.(none)>
+Date:   Mon Feb 13 23:33:38 2012 +0100
+
+    ARM: improve compiler's ability to optimize page tables Allow the compiler to better optimize the page table walking codeby avoiding over-complex pmd_addr_end() calculations.  Thesecalculations prevent the compiler spotting that we'll never iterateover the PMD table, causing it to create double nested loops wherea single loop will do. Signed-off-by: Russell King <rmk+kernel@arm.linux.org.uk>
+
 commit f9072b4a45cf2ff90fb41525688c71740d6a7869
 Author: Fikret Hasovic <fikret@ubuntu.(none)>
 Date:   Mon Feb 13 22:55:22 2012 +0100
